@@ -38,10 +38,14 @@ class window.Hexaflip
 
     cubeFragment = document.createDocumentFragment()
 
-    for key, set  of @sets
+    for key, set of @sets
       @_cubes[key] = @_createCube key
       @_setContent @_cubes[key].front, set[0]
       cubeFragment.appendChild @_cubes[key].el
+      for val in set
+        if @_urlRx.test val
+          image = new Image
+          image.src = val
 
     @el.classList.add @className
     @el.appendChild cubeFragment
