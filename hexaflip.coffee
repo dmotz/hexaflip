@@ -20,6 +20,7 @@ class window.Hexaflip
 
   className: baseName
   _touchCoefficient: .7
+  _urlRx: /^((https?:)?\/\/)|(data:)/
   _faceNames: ['front', 'bottom', 'back', 'top', 'left', 'right']
   _faceSequence: @::_faceNames.slice 0, 4
 
@@ -39,7 +40,7 @@ class window.Hexaflip
 
     for key, set  of @sets
       @_cubes[key] = @_createCube key
-      @_cubes[key].front.innerHTML = set[0]
+      @_setContent @_cubes[key].front, set[0]
       cubeFragment.appendChild @_cubes[key].el
 
     @el.classList.add @className
@@ -77,7 +78,7 @@ class window.Hexaflip
       index = @sets[key].indexOf value
       cube.yDelta = cube.yLast = 90 * index
       @_setSides cube
-      cube[@_faceSequence[index % 4]].innerHTML = value
+      @_setContent cube[@_faceSequence[index % 4]], value
 
 
   getValue: ->
@@ -124,8 +125,16 @@ class window.Hexaflip
     bottomAdj = faceOffset + 1
     topAdj = 3 if topAdj is -1
     bottomAdj = 0 if bottomAdj is 4
-    cube[@_faceSequence[topAdj]].innerHTML = set[setOffset - 1] or set[setLength - 1]
-    cube[@_faceSequence[bottomAdj]].innerHTML = set[setOffset + 1] or set[0]
+    @_setContent cube[@_faceSequence[topAdj]], set[setOffset - 1] or set[setLength - 1]
+    @_setContent cube[@_faceSequence[bottomAdj]], set[setOffset + 1] or set[0]
+
+
+  _setContent: (el, content) ->
+    if @_urlRx.test content
+      el.innerHTML = ''
+      el.style.backgroundImage = "url(#{ content })"
+    else
+      el.innerHTML = content
 
 
   _getTransform: (deg) ->
