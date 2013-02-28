@@ -4,7 +4,8 @@
 # http://oxism.com
 # Copyright 2013, MIT License
 
-
+baseName = 'hexaflip'
+className = baseName[0].toUpperCase() + baseName.slice 1
 testEl = document.createElement 'div'
 prefixList = ['Webkit', 'Moz', 'O', 'ms']
 transform = do ->
@@ -17,7 +18,7 @@ transform = do ->
 
 class window.Hexaflip
 
-  baseName: 'hexaflip'
+  className: baseName
   _touchCoefficient: .7
   _faceNames: ['front', 'bottom', 'back', 'top', 'left', 'right']
   _faceSequence: @::_faceNames.slice 0, 4
@@ -41,7 +42,7 @@ class window.Hexaflip
       @_cubes[key].front.innerHTML = set[0]
       cubeFragment.appendChild @_cubes[key].el
 
-    @el.classList.add @baseName
+    @el.classList.add @className
     @el.appendChild cubeFragment
 
 
@@ -54,11 +55,11 @@ class window.Hexaflip
       yLast: 0
       el: document.createElement 'div'
 
-    cube.el.className = "#{ @baseName }-cube #{ @baseName }-cube-#{ set }"
+    cube.el.className = "#{ @className }-cube #{ @className }-cube-#{ set }"
 
     for side in @_faceNames
       cube[side] = document.createElement 'div'
-      cube[side].className = @baseName + '-' + side
+      cube[side].className = @className + '-' + side
       cube.el.appendChild cube[side]
 
     for eventType in ['MouseDown', 'MouseMove', 'MouseUp', 'MouseOut'] then do (eventType) =>
