@@ -90,6 +90,7 @@ class window.HexaFlip
     cube.el.className = "#{ @className }-cube #{ @className }-cube-#{ set }"
     cube.el.style.margin = "0 #{ @margin }px"
     cube.el.style.width = cube.el.style.height = @size + 'px'
+    cube.el.style[css.transform] = @_getTransform 0
 
     for side in @_faceNames
       cube[side] = document.createElement 'div'
