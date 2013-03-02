@@ -234,3 +234,26 @@ class window.Hexaflip
 
 
 
+if window.jQuery? or window.$?.data?
+  $.fn.hexaflip = (sets, options) ->
+    return @ unless css.transform
+
+    if typeof sets is 'string'
+      methodName = sets
+      unless typeof Hexaflip::[methodName] is 'function'
+        console.warn "#{ baseName }: No such method `#{ methodName }`" if devMode
+        return @
+
+      for el in @
+        return unless instance = $.data el, baseName
+        args = Array::slice.call arguments
+        args.shift()
+        instance[methodName] args
+      @
+    else
+      for el in @
+        if instance = $.data el, baseName
+          return instance
+        else
+          $.data el, baseName, new Hexaflip el, sets, options
+
