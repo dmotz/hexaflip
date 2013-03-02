@@ -8,12 +8,18 @@ baseName = 'hexaflip'
 className = baseName[0].toUpperCase() + baseName.slice 1
 testEl = document.createElement 'div'
 prefixList = ['Webkit', 'Moz', 'O', 'ms']
-transform = do ->
-  return 'transform' if testEl.style.transform?
+
+prefixProp = (prop) ->
+  return prop.toLowerCase() if testEl.style.transform?
   for prefix in prefixList
-    prefixed = prefix + 'Transform'
+    prefixed = prefix + prop
     return prefixed if testEl.style[prefixed]?
   false
+
+css =
+  transform: prefixProp 'Transform'
+  perspective: prefixProp 'Perspective'
+
 
 
 class window.Hexaflip
