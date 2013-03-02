@@ -21,6 +21,11 @@ css =
   perspective: prefixProp 'Perspective'
 
 
+defaults =
+  size: 280
+  margin: 10
+  perspective: 1000
+
 
 class window.Hexaflip
 
@@ -36,6 +41,8 @@ class window.Hexaflip
       return
 
     @_cubes = {}
+    @[option] = @options[option] ? defaults[option] for option, value of defaults
+
     unless @sets
       @sets =
         hour: (i + '' for i in [1..12])
