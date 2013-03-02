@@ -30,8 +30,8 @@ class window.Hexaflip
   _faceNames: ['front', 'bottom', 'back', 'top', 'left', 'right']
   _faceSequence: @::_faceNames.slice 0, 4
 
-  constructor: (@el, @sets) ->
-    unless transform
+  constructor: (@el, @sets, @options = {}) ->
+    unless css.transform
       console?.warn "#{ baseName }: CSS transforms are not supported in this browser."
       return
 
