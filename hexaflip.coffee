@@ -60,6 +60,11 @@ class window.Hexaflip
           image = new Image
           image.src = val
 
+    setsKeys = Object.keys @sets
+    setsLength = setsKeys.length
+    @_cubes[setsKeys[0]].el.style.marginLeft = '0'
+    @_cubes[setsKeys[setsKeys.length - 1]].el.style.marginRight = '0'
+
     @el.classList.add @className
     @el.appendChild cubeFragment
 
@@ -74,6 +79,7 @@ class window.Hexaflip
       el: document.createElement 'div'
 
     cube.el.className = "#{ @className }-cube #{ @className }-cube-#{ set }"
+    cube.el.style.margin = "0 #{ @margin }px"
 
     for side in @_faceNames
       cube[side] = document.createElement 'div'
