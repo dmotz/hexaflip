@@ -39,7 +39,7 @@ class window.HexaFlip
       console?.warn "#{ baseName }: CSS transforms are not supported in this browser."
       return
 
-    @_cubes = {}
+    @cubes = {}
     @[option] = @options[option] ? defaults[option] for option, value of defaults
     @fontSize += 'px' if typeof @fontSize is 'number'
 
@@ -55,7 +55,7 @@ class window.HexaFlip
     i = z = 0
     midPoint = setsLength / 2 + 1
     for key, set of @sets
-      cube = @_cubes[key] = @_createCube key
+      cube = @cubes[key] = @_createCube key
       if ++i < midPoint
         z++
       else
@@ -68,8 +68,8 @@ class window.HexaFlip
           image = new Image
           image.src = val
 
-    @_cubes[setsKeys[0]].el.style.marginLeft = '0'
-    @_cubes[setsKeys[setsKeys.length - 1]].el.style.marginRight = '0'
+    @cubes[setsKeys[0]].el.style.marginLeft = '0'
+    @cubes[setsKeys[setsKeys.length - 1]].el.style.marginRight = '0'
 
     @el.classList.add @className
     @el.style.height = @size + 'px'
@@ -129,7 +129,7 @@ class window.HexaFlip
     for key, value of settings
       continue unless @sets[key]
       value = value.toString()
-      cube = @_cubes[key]
+      cube = @cubes[key]
       index = @sets[key].indexOf value
       cube.yDelta = cube.yLast = 90 * index
       @_setSides cube
@@ -137,7 +137,7 @@ class window.HexaFlip
 
 
   getValue: ->
-    for set, cube of @_cubes
+    for set, cube of @cubes
       set = @sets[set]
       setLength = set.length
       offset = cube.yLast / 90
