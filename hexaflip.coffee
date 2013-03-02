@@ -24,7 +24,7 @@ defaults =
   margin: 10
   fontSize: 185
   perspective: 1000
-  touchSensitivity: .7
+  touchSensitivity: 1
 
 
 class window.HexaFlip
