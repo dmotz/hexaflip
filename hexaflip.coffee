@@ -30,7 +30,7 @@ defaults =
 class window.HexaFlip
 
   className: baseName.toLowerCase()
-  _urlRx: /^((https?:)?\/\/)|(data:)/
+  _urlRx: /^((((https?)|(file)):)?\/\/)|(data:)/i
   _faceNames: ['front', 'bottom', 'back', 'top', 'left', 'right']
   _faceSequence: @::_faceNames.slice 0, 4
 
