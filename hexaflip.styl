@@ -1,94 +1,41 @@
 @import 'nib'
 
-$cubeWidth = 280
-
-body
-  padding: 50px
-  padding-top: 160px
-
-
-#choose-time
-  margin: 80px auto
-  width: 300px
-  text-align: center
-
-#hexaflip-test
-  width: $cubeWidth * 3 + 60 px
-  height: $cubeWidth px
-  font-family: 'Helvetica Neue', Arial, Helvetica, sans-serif
-  font-size: 20px
-  margin: 0 auto
-
-.hexaflip
-  perspective: 1000px
-
-
-.hexaflip-separator
-  color: #ccc
-  padding: 5px
-  display: inline-block
-
-
 .hexaflip-cube
+  font-family: 'Helvetica Neue', Arial, Helvetica, sans-serif
+  cursor: move
   cursor: -webkit-grab
+  cursor: -moz-grab
   display: inline-block
-  transform-style: preserve-3d
   position: relative
-  margin: 10px
-  width: $cubeWidth px
-  height: $cubeWidth px
+  transform-style: preserve-3d
   transition: transform .4s
-  transform: translate3d(0, 0, - $cubeWidth px)
 
   &.no-tween
     transition-duration: 0
 
+  &:nth-child(even)
+    z-index: 1
 
   > div
-    background-color: #333
-    width: $cubeWidth px
+    width: 100%
     overflow: hidden
-    height: $cubeWidth + 1 px
+    height: 100.5%
     position: absolute
-    color: #fff
     user-select: none
-    font-size: 186px
+    background-size: cover
+    text-align: center
+
+    background-color: #333
+    color: #fff
+    font-size: 9.2em
     font-weight: 100
     text-shadow: 0 -2px 0 rgba(0, 0, 0, .3)
     line-height: 1.5
-    text-align: center
-    background-size: cover
-
-
-  &.hexaflip-cube-meridian
-    z-index: -1
 
     > div
       &:nth-child(odd)
         background-color: #ff575b
 
 
-.hexaflip-front
-  transform: rotate3d(0, 0, 0, 0deg) translate3d(0, 0, $cubeWidth / 2 px)
-
-
-.hexaflip-back
-  transform: rotate3d(1, 0, 0, 180deg) translate3d(0, 0, $cubeWidth / 2 px)
-
-
-.hexaflip-top
-  transform: rotate3d(1, 0, 0, 90deg) translate3d(0, 0, $cubeWidth / 2 px)
-
-
-.hexaflip-bottom
-  transform: rotate3d(1, 0, 0, -90deg) translate3d(0, 0, $cubeWidth / 2 px)
-
-
-.hexaflip-left
-  transform: rotate3d(0, 1, 0, -90deg) translate3d(0, 0, $cubeWidth / 2 px)
-  background-color: #888 !important
-
-.hexaflip-right
-  transform: rotate3d(0, 1, 0, 90deg) translate3d(0, 0, $cubeWidth / 2 px)
-  background-color: #888 !important
-
+.hexaflip-left, .hexaflip-right
+  background-color: #555 !important
