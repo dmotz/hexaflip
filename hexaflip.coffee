@@ -106,10 +106,14 @@ class window.Hexaflip
       cube[side].style[css.transform] = "rotate3d(#{ rotate3d }) translate3d(0, 0, #{ @size / 2 }px)"
       cube.el.appendChild cube[side]
 
-    for eventType in ['MouseDown', 'MouseMove', 'MouseUp', 'MouseOut'] then do (eventType) =>
-      cube.el.addEventListener eventType.toLowerCase(), (e) =>
-        @['_on' + eventType] e, cube
-      , true
+    eventPairs = [['TouchStart', 'MouseDown'], ['TouchMove', 'MouseMove'],
+      ['TouchEnd', 'MouseUp'], ['TouchLeave', 'MouseOut']]
+
+    for eventPair in eventPairs
+      for eString in eventPair then do (fn = '_on' + eventPair[0], cube) =>
+        cube.el.addEventListener eString.toLowerCase(), (e) =>
+          @[fn] e, cube
+        , true
 
     cube
 
@@ -184,22 +188,25 @@ class window.Hexaflip
     "translate(0, 0) translateZ(-#{ @size }px) rotate3d(1, 0, 0, #{ deg }deg)"
 
 
-  _onMouseDown: (e, cube) ->
+  _onTouchStart: (e, cube) ->
     e.preventDefault()
     @_touchStarted = true
     e.currentTarget.classList.add 'no-tween'
-    cube.y1 = e.pageY
+    if e.type is 'mousedown'
+      cube.y1 = e.pageY
+    else
+      cube.y1 = e.touches[0].pageY
 
 
-  _onMouseMove: (e, cube) ->
-    e.preventDefault()
+  _onTouchMove: (e, cube) ->
     return unless @_touchStarted
+    e.preventDefault()
     cube.diff = (e.pageY - cube.y1) * @_touchCoefficient
     cube.yDelta = cube.yLast - cube.diff
     @_setSides cube
 
 
-  _onMouseUp: (e, cube) ->
+  _onTouchEnd: (e, cube) ->
     @_touchStarted = false
     mod = cube.yDelta % 90
     if mod < 45
@@ -211,15 +218,15 @@ class window.Hexaflip
         cube.yLast = cube.yDelta - (90 - mod)
 
     if cube.yLast % 90 isnt 0
-      console.log 'wtf'
       cube.yLast -= cube.yLast % 90
 
     cube.el.classList.remove 'no-tween'
     cube.el.style[transform] = @_getTransform cube.yLast
 
 
-  _onMouseOut: (e, cube) ->
+  _onTouchLeave: (e, cube) ->
     return unless @_touchStarted
-    @_onMouseUp e, cube if e.toElement and not cube.el.contains e.toElement
+    @_onTouchEnd e, cube if e.toElement and not cube.el.contains e.toElement
+
 
 
