@@ -25,12 +25,12 @@ defaults =
   size: 280
   margin: 10
   perspective: 1000
+  touchSensitivity: .7
 
 
 class window.Hexaflip
 
   className: baseName
-  _touchCoefficient: .7
   _urlRx: /^((https?:)?\/\/)|(data:)/
   _faceNames: ['front', 'bottom', 'back', 'top', 'left', 'right']
   _faceSequence: @::_faceNames.slice 0, 4
@@ -203,7 +203,7 @@ class window.Hexaflip
   _onTouchMove: (e, cube) ->
     return unless @_touchStarted
     e.preventDefault()
-    cube.diff = (e.pageY - cube.y1) * @_touchCoefficient
+    cube.diff = (e.pageY - cube.y1) * @touchSensitivity
     cube.yDelta = cube.yLast - cube.diff
     @_setSides cube
 
