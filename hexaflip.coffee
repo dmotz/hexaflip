@@ -49,19 +49,25 @@ class window.HexaFlip
         minute: (i + '0' for i in [0..5])
         meridian: ['am', 'pm']
 
+    setsKeys = Object.keys @sets
+    setsLength = setsKeys.length
     cubeFragment = document.createDocumentFragment()
-
+    i = z = 0
+    midPoint = setsLength / 2 + 1
     for key, set of @sets
-      @_cubes[key] = @_createCube key
-      @_setContent @_cubes[key].front, set[0]
-      cubeFragment.appendChild @_cubes[key].el
+      cube = @_cubes[key] = @_createCube key
+      if ++i < midPoint
+        z++
+      else
+        z--
+      cube.el.style.zIndex = z
+      @_setContent cube.front, set[0]
+      cubeFragment.appendChild cube.el
       for val in set
         if @_urlRx.test val
           image = new Image
           image.src = val
 
-    setsKeys = Object.keys @sets
-    setsLength = setsKeys.length
     @_cubes[setsKeys[0]].el.style.marginLeft = '0'
     @_cubes[setsKeys[setsKeys.length - 1]].el.style.marginRight = '0'
 
