@@ -22,7 +22,7 @@ css[prop.toLowerCase()] = prefixProp prop for prop in ['Transform', 'Perspective
 defaults =
   size: 280
   margin: 10
-  fontSize: '185px'
+  fontSize: 185
   perspective: 1000
   touchSensitivity: .7
 
@@ -41,6 +41,7 @@ class window.HexaFlip
 
     @_cubes = {}
     @[option] = @options[option] ? defaults[option] for option, value of defaults
+    @fontSize += 'px' if typeof @fontSize is 'number'
 
     unless @sets
       @sets =
