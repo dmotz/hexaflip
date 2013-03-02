@@ -44,7 +44,7 @@ class window.HexaFlip
     @fontSize += 'px' if typeof @fontSize is 'number'
 
     unless @sets
-      @_isTimePicker = true
+      @el.classList.add "#{ @className }-timepicker"
       @sets =
         hour: (i + '' for i in [1..12])
         minute: (i + '0' for i in [0..5])
@@ -73,7 +73,6 @@ class window.HexaFlip
     @cubes[setsKeys[setsKeys.length - 1]].el.style.marginRight = '0'
 
     @el.classList.add @className
-    @el.classList.add "#{ @className }-timepicker" if @_isTimePicker
     @el.style.height = @size + 'px'
     @el.style.width = ((@size + @margin * 2) * setsLength) - @margin * 2 + 'px'
     @el.style[css.perspective] = @perspective + 'px'
