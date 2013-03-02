@@ -88,6 +88,22 @@ class window.Hexaflip
     for side in @_faceNames
       cube[side] = document.createElement 'div'
       cube[side].className = @className + '-' + side
+      rotate3d = do ->
+        switch side
+          when 'front'
+            '0, 0, 0, 0deg'
+          when 'back'
+            '1, 0, 0, 180deg'
+          when 'top'
+            '1, 0, 0, 90deg'
+          when 'bottom'
+            '1, 0, 0, -90deg'
+          when 'left'
+            '0, 1, 0, -90deg'
+          when 'right'
+            '0, 1, 0, 90deg'
+
+      cube[side].style[css.transform] = "rotate3d(#{ rotate3d }) translate3d(0, 0, #{ @size / 2 }px)"
       cube.el.appendChild cube[side]
 
     for eventType in ['MouseDown', 'MouseMove', 'MouseUp', 'MouseOut'] then do (eventType) =>
