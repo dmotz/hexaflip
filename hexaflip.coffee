@@ -186,11 +186,17 @@ class window.HexaFlip
 
   _setContent: (el, content) ->
     return unless el and content
-    if @_urlRx.test content
-      el.innerHTML = ''
-      el.style.backgroundImage = "url(#{ content })"
+    if typeof content is 'object'
+      {style, value} = content
+      el.style[key] = val for key, val of style
     else
-      el.innerHTML = content
+      value = content
+
+    if @_urlRx.test value
+      el.innerHTML = ''
+      el.style.backgroundImage = "url(#{ value })"
+    else
+      el.innerHTML = value
 
 
   _getTransform: (deg) ->
