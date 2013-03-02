@@ -145,7 +145,7 @@ class window.Hexaflip
 
 
   _setSides: (cube) ->
-    cube.el.style[transform] = @_getTransform cube.yDelta
+    cube.el.style[css.transform] = @_getTransform cube.yDelta
     cube.offset = offset = Math.floor cube.yDelta / 90
     return if offset is cube.lastOffset
     cube.lastOffset = faceOffset = setOffset = offset
@@ -221,7 +221,7 @@ class window.Hexaflip
       cube.yLast -= cube.yLast % 90
 
     cube.el.classList.remove 'no-tween'
-    cube.el.style[transform] = @_getTransform cube.yLast
+    cube.el.style[css.transform] = @_getTransform cube.yLast
 
 
   _onTouchLeave: (e, cube) ->
