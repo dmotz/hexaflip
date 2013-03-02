@@ -201,7 +201,7 @@ class window.HexaFlip
 
 
   _getTransform: (deg) ->
-    "translate(0, 0) translateZ(-#{ @size }px) rotate3d(1, 0, 0, #{ deg }deg)"
+    "translate3d(0, 0, -#{ @size }px) rotate3d(1, 0, 0, #{ deg }deg)"
 
 
   _onTouchStart: (e, cube) ->
