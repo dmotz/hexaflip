@@ -120,6 +120,7 @@ class window.Hexaflip
 
   setValue: (settings) ->
     for key, value of settings
+      continue unless @sets[key]
       value = value.toString()
       cube = @_cubes[key]
       index = @sets[key].indexOf value
@@ -177,6 +178,7 @@ class window.Hexaflip
 
 
   _setContent: (el, content) ->
+    return unless el and content
     if @_urlRx.test content
       el.innerHTML = ''
       el.style.backgroundImage = "url(#{ content })"
