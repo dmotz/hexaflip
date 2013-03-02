@@ -4,7 +4,7 @@
 # http://oxism.com
 # Copyright 2013, MIT License
 
-baseName = 'hexaflip'
+baseName = 'hexaFlip'
 className = baseName[0].toUpperCase() + baseName.slice 1
 testEl = document.createElement 'div'
 prefixList = ['Webkit', 'Moz', 'O', 'ms']
@@ -27,9 +27,9 @@ defaults =
   touchSensitivity: .7
 
 
-class window.Hexaflip
+class window.HexaFlip
 
-  className: baseName
+  className: baseName.toLowerCase()
   _urlRx: /^((https?:)?\/\/)|(data:)/
   _faceNames: ['front', 'bottom', 'back', 'top', 'left', 'right']
   _faceSequence: @::_faceNames.slice 0, 4
@@ -233,12 +233,12 @@ class window.Hexaflip
 
 
 if window.jQuery? or window.$?.data?
-  $.fn.hexaflip = (sets, options) ->
+  $.fn.hexaFlip = (sets, options) ->
     return @ unless css.transform
 
     if typeof sets is 'string'
       methodName = sets
-      unless typeof Hexaflip::[methodName] is 'function'
+      unless typeof HexaFlip::[methodName] is 'function'
         console.warn "#{ baseName }: No such method `#{ methodName }`" if devMode
         return @
 
@@ -253,5 +253,5 @@ if window.jQuery? or window.$?.data?
         if instance = $.data el, baseName
           return instance
         else
-          $.data el, baseName, new Hexaflip el, sets, options
+          $.data el, baseName, new HexaFlip el, sets, options
 
