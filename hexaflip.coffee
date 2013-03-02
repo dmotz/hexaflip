@@ -66,6 +66,9 @@ class window.Hexaflip
     @_cubes[setsKeys[setsKeys.length - 1]].el.style.marginRight = '0'
 
     @el.classList.add @className
+    @el.style.height = @size + 'px'
+    @el.style.width = ((@size + @margin * 2) * setsLength) - @margin * 2 + 'px'
+    @el.style[css.perspective] = @perspective + 'px'
     @el.appendChild cubeFragment
 
 
@@ -80,6 +83,7 @@ class window.Hexaflip
 
     cube.el.className = "#{ @className }-cube #{ @className }-cube-#{ set }"
     cube.el.style.margin = "0 #{ @margin }px"
+    cube.el.style.width = cube.el.style.height = @size + 'px'
 
     for side in @_faceNames
       cube[side] = document.createElement 'div'
@@ -161,7 +165,7 @@ class window.Hexaflip
 
 
   _getTransform: (deg) ->
-    "translate(0, 0) translateZ(-280px) rotate3d(1, 0, 0, #{ deg }deg)"
+    "translate(0, 0) translateZ(-#{ @size }px) rotate3d(1, 0, 0, #{ deg }deg)"
 
 
   _onMouseDown: (e, cube) ->
