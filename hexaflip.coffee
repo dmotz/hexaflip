@@ -16,10 +16,8 @@ prefixProp = (prop) ->
     return prefixed if testEl.style[prefixed]?
   false
 
-css =
-  transform: prefixProp 'Transform'
-  perspective: prefixProp 'Perspective'
-
+css = {}
+css[prop.toLowerCase()] = prefixProp prop for prop in ['Transform', 'Perspective']
 
 defaults =
   size: 280
