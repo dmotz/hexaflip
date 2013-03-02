@@ -24,6 +24,7 @@ css =
 defaults =
   size: 280
   margin: 10
+  fontSize: '185px'
   perspective: 1000
   touchSensitivity: .7
 
@@ -104,6 +105,7 @@ class window.Hexaflip
             '0, 1, 0, 90deg'
 
       cube[side].style[css.transform] = "rotate3d(#{ rotate3d }) translate3d(0, 0, #{ @size / 2 }px)"
+      cube[side].style.fontSize = @fontSize
       cube.el.appendChild cube[side]
 
     eventPairs = [['TouchStart', 'MouseDown'], ['TouchMove', 'MouseMove'],
