@@ -123,33 +123,6 @@ class window.HexaFlip
     cube
 
 
-  setValue: (settings) ->
-    for key, value of settings
-      continue unless @sets[key]
-      value = value.toString()
-      cube = @cubes[key]
-      index = @sets[key].indexOf value
-      cube.yDelta = cube.yLast = 90 * index
-      @_setSides cube
-      @_setContent cube[faceSequence[index % 4]], value
-
-
-  getValue: ->
-    for set, cube of @cubes
-      set = @sets[set]
-      setLength = set.length
-      offset = cube.yLast / 90
-      if offset < 0
-        if -offset > setLength
-          offset = setLength - -offset % setLength
-          offset = 0 if offset is setLength
-        else
-          offset = setLength + offset
-
-      offset %= setLength if offset >= setLength
-      set[offset]
-
-
   _setSides: (cube) ->
     cube.el.style[css.transform] = @_getTransform cube.yDelta
     cube.offset = offset = Math.floor cube.yDelta / 90
@@ -240,6 +213,33 @@ class window.HexaFlip
   _onTouchLeave: (e, cube) ->
     return unless @_touchStarted
     @_onTouchEnd e, cube if e.toElement and not cube.el.contains e.toElement
+
+
+  setValue: (settings) ->
+    for key, value of settings
+      continue unless @sets[key]
+      value = value.toString()
+      cube = @cubes[key]
+      index = @sets[key].indexOf value
+      cube.yDelta = cube.yLast = 90 * index
+      @_setSides cube
+      @_setContent cube[faceSequence[index % 4]], value
+
+
+  getValue: ->
+    for set, cube of @cubes
+      set = @sets[set]
+      setLength = set.length
+      offset = cube.yLast / 90
+      if offset < 0
+        if -offset > setLength
+          offset = setLength - -offset % setLength
+          offset = 0 if offset is setLength
+        else
+          offset = setLength + offset
+
+      offset %= setLength if offset >= setLength
+      set[offset]
 
 
 
