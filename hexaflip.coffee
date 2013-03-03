@@ -26,25 +26,20 @@ defaults =
   perspective: 1000
   touchSensitivity: 1
 
+cssClass = baseName.toLowerCase()
+faceNames = ['front', 'bottom', 'back', 'top', 'left', 'right']
+faceSequence = faceNames.slice 0, 4
+urlRx = /^((((https?)|(file)):)?\/\/)|(data:)/i
 
 class window.HexaFlip
 
-  className: baseName.toLowerCase()
-  _urlRx: /^((((https?)|(file)):)?\/\/)|(data:)/i
-  _faceNames: ['front', 'bottom', 'back', 'top', 'left', 'right']
-  _faceSequence: @::_faceNames.slice 0, 4
-
   constructor: (@el, @sets, @options = {}) ->
-    unless css.transform
-      console?.warn "#{ baseName }: CSS transforms are not supported in this browser."
-      return
-
-    @cubes = {}
+    return unless css.transform and @el
     @[option] = @options[option] ? defaults[option] for option, value of defaults
     @fontSize += 'px' if typeof @fontSize is 'number'
 
     unless @sets
-      @el.classList.add "#{ @className }-timepicker"
+      @el.classList.add "#{ cssClass }-timepicker"
       @sets =
         hour: (i + '' for i in [1..12])
         minute: (i + '0' for i in [0..5])
@@ -55,6 +50,7 @@ class window.HexaFlip
     cubeFragment = document.createDocumentFragment()
     i = z = 0
     midPoint = setsLength / 2 + 1
+    @cubes = {}
     for key, set of @sets
       cube = @cubes[key] = @_createCube key
       if ++i < midPoint
@@ -65,14 +61,14 @@ class window.HexaFlip
       @_setContent cube.front, set[0]
       cubeFragment.appendChild cube.el
       for val in set
-        if @_urlRx.test val
+        if urlRx.test val
           image = new Image
           image.src = val
 
     @cubes[setsKeys[0]].el.style.marginLeft = '0'
     @cubes[setsKeys[setsKeys.length - 1]].el.style.marginRight = '0'
 
-    @el.classList.add @className
+    @el.classList.add cssClass
     @el.style.height = @size + 'px'
     @el.style.width = ((@size + @margin * 2) * setsLength) - @margin * 2 + 'px'
     @el.style[css.perspective] = @perspective + 'px'
@@ -88,14 +84,14 @@ class window.HexaFlip
       yLast: 0
       el: document.createElement 'div'
 
-    cube.el.className = "#{ @className }-cube #{ @className }-cube-#{ set }"
+    cube.el.className = "#{ cssClass }-cube #{ cssClass }-cube-#{ set }"
     cube.el.style.margin = "0 #{ @margin }px"
     cube.el.style.width = cube.el.style.height = @size + 'px'
     cube.el.style[css.transform] = @_getTransform 0
 
-    for side in @_faceNames
+    for side in faceNames
       cube[side] = document.createElement 'div'
-      cube[side].className = @className + '-' + side
+      cube[side].className = cssClass + '-' + side
       rotate3d = do ->
         switch side
           when 'front'
@@ -135,7 +131,7 @@ class window.HexaFlip
       index = @sets[key].indexOf value
       cube.yDelta = cube.yLast = 90 * index
       @_setSides cube
-      @_setContent cube[@_faceSequence[index % 4]], value
+      @_setContent cube[faceSequence[index % 4]], value
 
 
   getValue: ->
@@ -182,8 +178,8 @@ class window.HexaFlip
     bottomAdj = faceOffset + 1
     topAdj = 3 if topAdj is -1
     bottomAdj = 0 if bottomAdj is 4
-    @_setContent cube[@_faceSequence[topAdj]], set[setOffset - 1] or set[setLength - 1]
-    @_setContent cube[@_faceSequence[bottomAdj]], set[setOffset + 1] or set[0]
+    @_setContent cube[faceSequence[topAdj]], set[setOffset - 1] or set[setLength - 1]
+    @_setContent cube[faceSequence[bottomAdj]], set[setOffset + 1] or set[0]
 
 
   _setContent: (el, content) ->
@@ -194,7 +190,7 @@ class window.HexaFlip
     else
       value = content
 
-    if @_urlRx.test value
+    if urlRx.test value
       el.innerHTML = ''
       el.style.backgroundImage = "url(#{ value })"
     else
@@ -250,13 +246,9 @@ class window.HexaFlip
 if window.jQuery? or window.$?.data?
   $.fn.hexaFlip = (sets, options) ->
     return @ unless css.transform
-
     if typeof sets is 'string'
       methodName = sets
-      unless typeof HexaFlip::[methodName] is 'function'
-        console.warn "#{ baseName }: No such method `#{ methodName }`" if devMode
-        return @
-
+      return @ unless typeof HexaFlip::[methodName] is 'function'
       for el in @
         return unless instance = $.data el, baseName
         args = Array::slice.call arguments
