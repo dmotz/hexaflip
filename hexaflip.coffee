@@ -39,7 +39,7 @@ class window.HexaFlip
     @fontSize += 'px' if typeof @fontSize is 'number'
 
     unless @sets
-      @el.classList.add "#{ cssClass }-timepicker"
+      @el.classList.add cssClass + '-timepicker'
       @sets =
         hour: (i + '' for i in [1..12])
         minute: (i + '0' for i in [0..5])
