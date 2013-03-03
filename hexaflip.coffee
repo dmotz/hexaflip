@@ -10,7 +10,7 @@ testEl = document.createElement 'div'
 prefixList = ['Webkit', 'Moz', 'O', 'ms']
 
 prefixProp = (prop) ->
-  return prop.toLowerCase() if testEl.style.transform?
+  return prop.toLowerCase() if testEl.style[prop.toLowerCase()]?
   for prefix in prefixList
     prefixed = prefix + prop
     return prefixed if testEl.style[prefixed]?
