@@ -123,6 +123,25 @@ class window.HexaFlip
     cube
 
 
+  _getTransform: (deg) ->
+    "translate3d(0, 0, -#{ @size }px) rotate3d(1, 0, 0, #{ deg }deg)"
+
+
+  _setContent: (el, content) ->
+    return unless el and content
+    if typeof content is 'object'
+      {style, value} = content
+      el.style[key] = val for key, val of style
+    else
+      value = content
+
+    if urlRx.test value
+      el.innerHTML = ''
+      el.style.backgroundImage = "url(#{ value })"
+    else
+      el.innerHTML = value
+
+
   _setSides: (cube) ->
     cube.el.style[css.transform] = @_getTransform cube.yDelta
     cube.offset = offset = Math.floor cube.yDelta / 90
@@ -153,25 +172,6 @@ class window.HexaFlip
     bottomAdj = 0 if bottomAdj is 4
     @_setContent cube[faceSequence[topAdj]], set[setOffset - 1] or set[setLength - 1]
     @_setContent cube[faceSequence[bottomAdj]], set[setOffset + 1] or set[0]
-
-
-  _setContent: (el, content) ->
-    return unless el and content
-    if typeof content is 'object'
-      {style, value} = content
-      el.style[key] = val for key, val of style
-    else
-      value = content
-
-    if urlRx.test value
-      el.innerHTML = ''
-      el.style.backgroundImage = "url(#{ value })"
-    else
-      el.innerHTML = value
-
-
-  _getTransform: (deg) ->
-    "translate3d(0, 0, -#{ @size }px) rotate3d(1, 0, 0, #{ deg }deg)"
 
 
   _onTouchStart: (e, cube) ->
