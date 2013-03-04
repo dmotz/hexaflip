@@ -126,7 +126,7 @@ class window.HexaFlip
 
 
   _getTransform: (deg) ->
-    "translate3d(0, 0, -#{ @size / 2 }px) rotate3d(1, 0, 0, #{ deg }deg)"
+    "translateZ(-#{ @size / 2 }px) rotateX(#{ deg }deg)"
 
 
   _setContent: (el, content) ->
