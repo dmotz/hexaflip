@@ -243,6 +243,16 @@ class window.HexaFlip
       set[offset]
 
 
+  flip: (back) ->
+    delta = if back then -90 else 90
+    for set, cube of @cubes
+      cube.yDelta = cube.yLast += delta
+      @_setSides cube
+
+
+  flipBack: ->
+    @flip true
+
 
 if window.jQuery? or window.$?.data?
   $.fn.hexaFlip = (sets, options) ->
