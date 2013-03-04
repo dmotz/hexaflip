@@ -120,6 +120,7 @@ class window.HexaFlip
           @[fn] e, cube
         , true
 
+    @_setSides cube
     cube
 
 
