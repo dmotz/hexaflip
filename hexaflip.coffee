@@ -20,9 +20,9 @@ css = {}
 css[prop.toLowerCase()] = prefixProp prop for prop in ['Transform', 'Perspective']
 
 defaults =
-  size: 280
+  size: 200
   margin: 10
-  fontSize: 185
+  fontSize: 132
   perspective: 1000
   touchSensitivity: 1
 
