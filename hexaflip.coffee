@@ -111,13 +111,15 @@ class window.HexaFlip
       cube.el.appendChild cube[side]
 
     eventPairs = [['TouchStart', 'MouseDown'], ['TouchMove', 'MouseMove'],
-      ['TouchEnd', 'MouseUp'], ['TouchLeave', 'MouseOut']]
+      ['TouchEnd', 'MouseUp'], ['TouchLeave', 'MouseLeave']]
+    mouseLeaveSupport = 'onmouseleave' of window
 
     for eventPair in eventPairs
       for eString in eventPair then do (fn = '_on' + eventPair[0], cube) =>
-        cube.el.addEventListener eString.toLowerCase(), (e) =>
-          @[fn] e, cube
-        , true
+        unless (eString is 'TouchLeave' or eString is 'MouseLeave') and !mouseLeaveSupport
+          cube.el.addEventListener eString.toLowerCase(), ((e) => @[fn] e, cube), true
+        else
+          cube.el.addEventListener 'mouseout', ((e) => @_onMouseOut e, cube), true
 
     @_setSides cube
     cube
@@ -176,7 +178,7 @@ class window.HexaFlip
 
   _onTouchStart: (e, cube) ->
     e.preventDefault()
-    @_touchStarted = true
+    cube.touchStarted = true
     e.currentTarget.classList.add 'no-tween'
     if e.type is 'mousedown'
       cube.y1 = e.pageY
@@ -185,7 +187,7 @@ class window.HexaFlip
 
 
   _onTouchMove: (e, cube) ->
-    return unless @_touchStarted
+    return unless cube.touchStarted
     e.preventDefault()
     cube.diff = (e.pageY - cube.y1) * @touchSensitivity
     cube.yDelta = cube.yLast - cube.diff
@@ -193,7 +195,7 @@ class window.HexaFlip
 
 
   _onTouchEnd: (e, cube) ->
-    @_touchStarted = false
+    cube.touchStarted = false
     mod = cube.yDelta % 90
     if mod < 45
       cube.yLast = cube.yDelta + mod
@@ -211,8 +213,13 @@ class window.HexaFlip
 
 
   _onTouchLeave: (e, cube) ->
-    return unless @_touchStarted
-    @_onTouchEnd e, cube if e.toElement and not cube.el.contains e.toElement
+    return unless cube.touchStarted
+    @_onTouchEnd e, cube
+
+
+  _onMouseOut: (e, cube) =>
+    return unless cube.touchStarted
+    @_onTouchEnd e, cube if e.toElement and !cube.el.contains e.toElement
 
 
   setValue: (settings) ->
