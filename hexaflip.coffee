@@ -6,14 +6,13 @@
 
 baseName = 'hexaFlip'
 className = baseName[0].toUpperCase() + baseName.slice 1
-testEl = document.createElement 'div'
 prefixList = ['Webkit', 'Moz', 'O', 'ms']
 
 prefixProp = (prop) ->
-  return prop.toLowerCase() if testEl.style[prop.toLowerCase()]?
+  return prop.toLowerCase() if document.body.style[prop.toLowerCase()]?
   for prefix in prefixList
     prefixed = prefix + prop
-    return prefixed if testEl.style[prefixed]?
+    return prefixed if document.body.style[prefixed]?
   false
 
 css = {}
