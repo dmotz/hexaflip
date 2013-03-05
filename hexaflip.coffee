@@ -224,7 +224,7 @@ class window.HexaFlip
 
   setValue: (settings) ->
     for key, value of settings
-      continue unless @sets[key]
+      continue unless @sets[key] and !@cubes[key].touchStarted
       value = value.toString()
       cube = @cubes[key]
       index = @sets[key].indexOf value
@@ -252,6 +252,7 @@ class window.HexaFlip
   flip: (back) ->
     delta = if back then -90 else 90
     for set, cube of @cubes
+      continue if @cubes[key].touchStarted
       cube.yDelta = cube.yLast += delta
       @_setSides cube
 
