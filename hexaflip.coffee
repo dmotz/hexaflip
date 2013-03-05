@@ -6,7 +6,7 @@
 
 baseName = 'hexaFlip'
 className = baseName[0].toUpperCase() + baseName.slice 1
-prefixList = ['Webkit', 'Moz', 'O', 'ms']
+prefixList = ['webkit', 'Moz', 'O', 'ms']
 
 prefixProp = (prop) ->
   return prop.toLowerCase() if document.body.style[prop.toLowerCase()]?
