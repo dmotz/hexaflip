@@ -1,0 +1,53 @@
+.hexaflip-cube {
+  font-family: 'Helvetica Neue', Arial, Helvetica, sans-serif;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  cursor: move;
+  cursor: -webkit-grab;
+  cursor: -moz-grab;
+  display: inline-block;
+  position: relative;
+  -webkit-transform-style: preserve-3d;
+  -moz-transform-style: preserve-3d;
+  -o-transform-style: preserve-3d;
+  -ms-transform-style: preserve-3d;
+  transform-style: preserve-3d;
+  -webkit-transition: -webkit-transform 0.4s;
+  -moz-transition: -moz-transform 0.4s;
+  -o-transition: -o-transform 0.4s;
+  -ms-transition: -ms-transform 0.4s;
+  transition: transform 0.4s;
+}
+.hexaflip-cube.no-tween {
+  -webkit-transition-duration: 0;
+  -moz-transition-duration: 0;
+  -o-transition-duration: 0;
+  -ms-transition-duration: 0;
+  transition-duration: 0;
+}
+.hexaflip-cube > div {
+  width: 100%;
+  overflow: hidden;
+  height: 100.5%;
+  position: absolute;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  background-size: cover;
+  text-align: center;
+  background-color: #333;
+  color: #fff;
+  font-weight: 100;
+  text-shadow: 0 -2px 0 rgba(0,0,0,0.2);
+  line-height: 1.5;
+}
+.hexaflip-left,
+.hexaflip-right {
+  background-color: #555 !important;
+}
+.hexaflip-timepicker .hexaflip-cube:last-child > div:nth-child(odd) {
+  background-color: #ff575b;
+}
