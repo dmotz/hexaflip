@@ -246,13 +246,16 @@ class window.HexaFlip
           offset = setLength + offset
 
       offset %= setLength if offset >= setLength
-      set[offset]
+      if typeof set[offset] is 'object'
+        set[offset].value
+      else
+        set[offset]
 
 
   flip: (back) ->
     delta = if back then -90 else 90
     for set, cube of @cubes
-      continue if @cubes[key].touchStarted
+      continue if cube.touchStarted
       cube.yDelta = cube.yLast += delta
       @_setSides cube
 
