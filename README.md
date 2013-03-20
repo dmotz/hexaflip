@@ -1,4 +1,4 @@
-#HexaFlip
+#[HexaFlip](http://oxism.com/hexaflip/)
 [Dan Motzenbecker](http://oxism.com), MIT License
 
 [@dcmotz](http://twitter.com/dcmotz)
