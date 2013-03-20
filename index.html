@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="author" content="Dan Motzenbecker">
+    <meta name="description" content="HexaFlip - a javascript library that visualizes arrays as cube interfaces.">
+    <title>HexaFlip - a javascript library that visualizes arrays as cube interfaces.</title>
+    <link href="demo/demo.css" rel="stylesheet" type="text/css">
+    <link href="hexaflip.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+    <div class="logo"></div>
+    <div class="logo"></div>
+
+    <section>
+        <h1><em>HexaFlip</em> visualizes arrays as cube interfaces.</h1>
+        <h2>Transform arrays of any length into cubes with infinite sides.</h2>
+        <h2>Featuring touch/mouse interaction, getter/setter methods, zero dependencies, and jQuery support.</h2>
+        <div id="buttons">
+            <a href="http://github.com/dmotz/hexaflip">source on github</a>
+            <a href="hexaflip.js">hexaflip.js</a>
+            <a href="http://oxism.com" class="more">more projects</a>
+        </div>
+    </section>
+    <section>
+        <h1>Like photos:</h1>
+        <div id="photo-controls">
+            <div><span>&#9664;</span></div>
+            <div><span>&#9654;</span></div>
+        </div>
+        <div id="photo-demo"></div>
+    </section>
+    <section>
+        <h1>Or time:</h1>
+        <div id="time-demo"></div>
+    </section>
+    <section>
+        <h3>About</h3>
+        <p>
+            HexaFlip was born out of the time-picker interface in the iPhone app
+            <a href="http://chaincalapp.com">ChainCal</a>. It&rsquo;s been expanded to
+            visualize abitrary arrays of any length.
+        </p>
+        <p>
+            For a detailed walk through the code, take a look at the
+            <a href="http://tympanus.net/codrops/2013/03/07/hexaflip-a-flexible-3d-cube-plugin/">Codrops article</a>
+            written about HexaFlip.
+        </p>
+        <p>
+            HexaFlip is developed by <a href="http://oxism.com">Dan Motzenbecker</a>.
+            For similar UI experiments, check out <a href="http://oridomi.com">oriDomi</a>
+            and <a href="http://oxism.com/maskew">Maskew</a>.
+            <a href="https://twitter.com/dcmotz">Follow me on twitter</a> for updates and other experiments.
+        </p>
+        <h3>Basic Usage</h3>
+        <p>Create an instance by passing a DOM element and a key-value set of arrays:</p>
+<pre>
+<code>
+var cubeSet = new HexaFlip(documentGetElementById('my-el'),
+    {
+        prince: ['For You', 'Prince', 'Dirty Mind', 'Controversy', '1999', 'Around the World in a Day'],
+        curtis: ['Curtis', 'Roots', 'Super Fly', 'Back to the World', 'Got to Find a Way', 'Sweet Exorcist']
+    }
+);
+</code>
+</pre>
+        <p>If a value is a URL, HexaFlip will set that side to the image it points to, preloading it automatically.</p>
+        <p>
+            You can also pass objects as values with <code>style</code> and <code>value</code> keys.
+            Make the former an object literal of CSS properties to customize the styling of that cube face.
+            </p>
+        <p>To set and get the values of the cubes:</p>
+<pre>
+<code>
+cubeSet.setValue({ prince: '1999', curtis: 'Roots' });
+cubeSet.getValue();
+</code>
+</pre>
+        <p>To rotate the cubes to the next or previous sides:</p>
+<pre>
+<code>
+cubeSet.flip();
+cubeSet.flipBack();
+</code>
+</pre>
+        <p>
+            For a more detailed guide, read the <a href="http://tympanus.net/codrops/2013/03/07/hexaflip-a-flexible-3d-cube-plugin/">Codrops article</a>.
+        </p>
+    </section>
+
+    <footer>
+       ex libris <a href="http://oxism.com">oxism.com</a> / <a href="http://twitter.com/dcmotz">@dcmotz</a>
+    </footer>
+
+    <script src="hexaflip.js"></script>
+    <script src="demo/demo.js"></script>
+    <script>
+        var _gaq = _gaq || [];
+        _gaq.push(['_setAccount', 'UA-30392798-1']);
+        _gaq.push(['_trackPageview']);
+        (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+        })();
+    </script>
+</body>
+</html>

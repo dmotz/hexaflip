@@ -1,0 +1,209 @@
+@import 'nib'
+$drop = drop-shadow(20px 20px 20px rgba(0, 0, 0, .2))
+$shadow()
+  -webkit-filter: $drop
+  -moz-filter: $drop
+  filter: $drop
+
+*
+  box-sizing: border-box
+
+html
+  background-color: #f9f9f9
+  color: #222
+  font-size: 62.5%
+  font-family: 'Helvetica Neue', Arial, Helvetica, sans-serif
+  text-rendering: optimizeLegibility
+  font-smoothing: antialiased
+
+
+::selection, ::-moz-selection
+  background: #000
+  color: #fff;
+  text-shadow: none
+
+
+body
+  width: 52rem
+  margin: 0 auto
+  padding: 3rem 0
+
+  > section
+    text-align: left
+    width: 100%
+    overflow: visible
+
+
+h1
+  font-size: 4rem
+  font-weight: 300
+
+
+  em
+    font-style: normal
+    font-weight: 900
+
+
+h2
+  font-size: 2.4rem
+  //margin: 0rem
+  font-weight: 200
+  //letter-spacing: -1px
+  color: #888
+  line-height: 1.5
+  font-style: italic
+
+
+h3
+  font-size: 2.5rem
+
+
+p
+  font-size: 1.8rem
+  line-height: 1.8
+  margin-bottom: 4rem
+
+  a
+    color: #555
+    text-decoration: none
+    border-bottom: 1px #ccc dashed
+    transition: opacity .3s
+
+    &:hover
+      opacity: .7
+
+  code
+    font-size: 1.4rem
+
+
+.logo
+  margin: 0 auto
+  margin-bottom: 4rem
+  $shadow()
+
+  .hexaflip-cube
+    opacity: .9
+
+    .hexaflip-left, .hexaflip-right
+      background-color: #222 !important
+
+    > div
+      font-weight: 100
+      text-shadow: none
+
+      &:nth-child(1n+1)
+        background-color: #069ad5
+
+      &:nth-child(2n+2)
+        background-color: #fc5215
+
+      &:nth-child(3n+3)
+        background-color: #30b71d
+
+      &:nth-child(4n+4)
+        background-color: #eee
+        color: #222
+
+
+#buttons
+  text-align: center
+  > a
+    margin: 2rem 0.3rem
+    display: inline-block
+    font-size: 1.8rem
+    letter-spacing: -1px
+    font-weight: 500
+    padding: 1.5rem
+    border-radius: 4px
+    text-decoration: none
+    background-color: #222
+    color: #fff
+    transition: opacity .3s
+
+    &:hover
+      opacity: .8
+
+    &.more
+      background-color: #888
+
+
+$photoDrop = drop-shadow(0 0 5px rgba(0, 0, 0, .2))
+#photo-demo
+  text-align: center
+  margin: 0 auto
+  padding-bottom: 3rem
+  margin-bottom: 8rem
+  -webkit-filter: $photoDrop
+  -moz-filter: $photoDrop
+  filter: $photoDrop
+
+
+#photo-controls
+  width: 100%
+  position: relative
+  top: 18.5rem
+
+  > div
+    color: #ccc
+    background-color: #444
+    border-radius: 100%
+    padding: 1rem
+    font-size: 2rem
+    display: inline-block
+    width: 3rem
+    height: 3rem
+    font-weight: 200
+    line-height: 0.2
+    text-align: center
+    cursor: pointer
+    user-select: none
+
+    &:hover
+      opacity: .8
+
+    > span
+      position: relative
+      left: -0.6rem
+      top: 0.4rem
+
+    &:first-child
+      float: left
+
+    &:last-child
+      float: right
+
+      > span
+        left: -0.1rem
+
+
+#time-demo
+  margin: 0 auto
+  margin-bottom: 9rem
+
+
+pre
+  background-color: #eee
+  width: 100%
+  padding: 0.5rem
+  padding-bottom: 1rem
+  overflow: auto
+  border-radius: 3px
+  margin-bottom: 4rem
+
+code
+  font-family: Menlo, Consolas, Monaco, "Lucida Console", monospace
+  font-size: 1rem
+  color: #777
+  font-weight: bold
+  line-height: 1.8
+
+
+footer
+  text-align: center
+  font-size: 1.4rem
+  color: #aaa
+  margin: 4rem
+
+  a
+    color: #333
+
