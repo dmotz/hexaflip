@@ -217,7 +217,7 @@ class window.HexaFlip
     @_onTouchEnd e, cube
 
 
-  _onMouseOut: (e, cube) =>
+  _onMouseOut: (e, cube) ->
     return unless cube.touchStarted
     @_onTouchEnd e, cube if e.toElement and !cube.el.contains e.toElement
 
