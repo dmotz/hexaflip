@@ -1,3 +1,4 @@
+#![HexaFlip](http://oxism.com/images/hexaflip.png)
 #[HexaFlip](http://oxism.com/hexaflip/)
 [Dan Motzenbecker](http://oxism.com), MIT License
 
