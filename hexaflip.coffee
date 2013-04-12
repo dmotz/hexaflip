@@ -59,10 +59,7 @@ class window.HexaFlip
       cube.el.style.zIndex = z
       @_setContent cube.front, set[0]
       cubeFragment.appendChild cube.el
-      for val in set
-        if urlRx.test val
-          image = new Image
-          image.src = val
+      (new Image).src = val for val in set when urlRx.test val
 
     @cubes[setsKeys[0]].el.style.marginLeft = '0'
     @cubes[setsKeys[setsKeys.length - 1]].el.style.marginRight = '0'

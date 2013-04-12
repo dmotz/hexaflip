@@ -50,7 +50,7 @@
 
   window.HexaFlip = (function() {
     function HexaFlip(el, sets, options) {
-      var cube, cubeFragment, i, image, key, midPoint, option, set, setsKeys, setsLength, val, value, z, _j, _len1, _ref1, _ref2;
+      var cube, cubeFragment, i, key, midPoint, option, set, setsKeys, setsLength, val, value, z, _j, _len1, _ref1, _ref2;
 
       this.el = el;
       this.sets = sets;
@@ -110,8 +110,7 @@
         for (_j = 0, _len1 = set.length; _j < _len1; _j++) {
           val = set[_j];
           if (urlRx.test(val)) {
-            image = new Image;
-            image.src = val;
+            (new Image).src = val;
           }
         }
       }
