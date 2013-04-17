@@ -24,6 +24,7 @@ defaults =
   fontSize: 132
   perspective: 1000
   touchSensitivity: 1
+  horizontalFlip: false
 
 cssClass = baseName.toLowerCase()
 faceNames = ['front', 'bottom', 'back', 'top', 'left', 'right']
@@ -69,15 +70,16 @@ class window.HexaFlip
     @el.style.width = ((@size + @margin * 2) * setsLength) - @margin * 2 + 'px'
     @el.style[css.perspective] = @perspective + 'px'
     @el.appendChild cubeFragment
+    @eProp = if @horizontalFlip then 'pageX' else 'pageY'
 
 
   _createCube: (set) ->
     cube =
       set: set
       offset: 0
-      y1: 0
-      yDelta: 0
-      yLast: 0
+      start: 0
+      delta: 0
+      last: 0
       el: document.createElement 'div'
 
     cube.el.className = "#{ cssClass }-cube #{ cssClass }-cube-#{ set }"
@@ -88,22 +90,23 @@ class window.HexaFlip
     for side in faceNames
       cube[side] = document.createElement 'div'
       cube[side].className = cssClass + '-' + side
-      rotate3d = do ->
+      rotation = do ->
         switch side
           when 'front'
-            '0, 0, 0, 0deg'
+            ''
           when 'back'
-            '1, 0, 0, 180deg'
+            'rotateX(180deg)'
           when 'top'
-            '1, 0, 0, 90deg'
+            'rotateX(90deg)'
           when 'bottom'
-            '1, 0, 0, -90deg'
+            'rotateX(-90deg)'
           when 'left'
-            '0, 1, 0, -90deg'
+            'rotateY(-90deg)'
           when 'right'
-            '0, 1, 0, 90deg'
+            'rotateY(90deg)'
 
-      cube[side].style[css.transform] = "rotate3d(#{ rotate3d }) translate3d(0, 0, #{ @size / 2 }px)"
+      cube[side].style[css.transform] = "#{ rotation } translate3d(0, 0, #{ @size / 2 }px)" +
+        (if @horizontalFlip then 'rotateZ(90deg)' else '')
       cube[side].style.fontSize = @fontSize
       cube.el.appendChild cube[side]
 
@@ -123,7 +126,8 @@ class window.HexaFlip
 
 
   _getTransform: (deg) ->
-    "translateZ(-#{ @size / 2 }px) rotateX(#{ deg }deg)"
+    (if @horizontalFlip then 'rotateZ(-90deg)' else '') +
+      " translateZ(-#{ @size / 2 }px) rotateX(#{ deg }deg)"
 
 
   _setContent: (el, content) ->
@@ -142,8 +146,8 @@ class window.HexaFlip
 
 
   _setSides: (cube) ->
-    cube.el.style[css.transform] = @_getTransform cube.yDelta
-    cube.offset = offset = Math.floor cube.yDelta / 90
+    cube.el.style[css.transform] = @_getTransform cube.delta
+    cube.offset = offset = Math.floor cube.delta / 90
     return if offset is cube.lastOffset
     cube.lastOffset = faceOffset = setOffset = offset
     set = @sets[cube.set]
@@ -178,35 +182,35 @@ class window.HexaFlip
     cube.touchStarted = true
     e.currentTarget.classList.add 'no-tween'
     if e.type is 'mousedown'
-      cube.y1 = e.pageY
+      cube.start = e[@eProp]
     else
-      cube.y1 = e.touches[0].pageY
+      cube.start = e.touches[0][@eProp]
 
 
   _onTouchMove: (e, cube) ->
     return unless cube.touchStarted
     e.preventDefault()
-    cube.diff = (e.pageY - cube.y1) * @touchSensitivity
-    cube.yDelta = cube.yLast - cube.diff
+    cube.diff = (e[@eProp] - cube.start) * @touchSensitivity
+    cube.delta = cube.last - cube.diff
     @_setSides cube
 
 
   _onTouchEnd: (e, cube) ->
     cube.touchStarted = false
-    mod = cube.yDelta % 90
+    mod = cube.delta % 90
     if mod < 45
-      cube.yLast = cube.yDelta + mod
+      cube.last = cube.delta + mod
     else
-      if cube.yDelta > 0
-        cube.yLast = cube.yDelta + mod
+      if cube.delta > 0
+        cube.last = cube.delta + mod
       else
-        cube.yLast = cube.yDelta - (90 - mod)
+        cube.last = cube.delta - (90 - mod)
 
-    if cube.yLast % 90 isnt 0
-      cube.yLast -= cube.yLast % 90
+    if cube.last % 90 isnt 0
+      cube.last -= cube.last % 90
 
     cube.el.classList.remove 'no-tween'
-    cube.el.style[css.transform] = @_getTransform cube.yLast
+    cube.el.style[css.transform] = @_getTransform cube.last
 
 
   _onTouchLeave: (e, cube) ->
@@ -225,7 +229,7 @@ class window.HexaFlip
       value = value.toString()
       cube = @cubes[key]
       index = @sets[key].indexOf value
-      cube.yDelta = cube.yLast = 90 * index
+      cube.delta = cube.last = 90 * index
       @_setSides cube
       @_setContent cube[faceSequence[index % 4]], value
 
@@ -234,7 +238,7 @@ class window.HexaFlip
     for set, cube of @cubes
       set = @sets[set]
       setLength = set.length
-      offset = cube.yLast / 90
+      offset = cube.last / 90
       if offset < 0
         if -offset > setLength
           offset = setLength - -offset % setLength
@@ -253,7 +257,7 @@ class window.HexaFlip
     delta = if back then -90 else 90
     for set, cube of @cubes
       continue if cube.touchStarted
-      cube.yDelta = cube.yLast += delta
+      cube.delta = cube.last += delta
       @_setSides cube
 
 
