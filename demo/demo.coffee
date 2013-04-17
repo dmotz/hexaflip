@@ -31,6 +31,7 @@ document.addEventListener 'DOMContentLoaded', ->
   hexaPhoto = new HexaFlip document.getElementById('photo-demo'),
     {photos: ("./demo/images/#{ i }.jpg" for i in [1..18])},
     size: 400
+    horizontalFlip: true
 
   photoControls = document.getElementById 'photo-controls'
 
