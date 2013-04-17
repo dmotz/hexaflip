@@ -140,9 +140,10 @@ p code {
   filter: drop-shadow(0 0 5px rgba(0,0,0,0.2));
 }
 #photo-controls {
-  width: 100%;
+  width: 110%;
   position: relative;
   top: 18.5rem;
+  left: -5%;
 }
 #photo-controls > div {
   color: #ccc;
@@ -202,6 +203,7 @@ code {
   color: #777;
   font-weight: bold;
   line-height: 1.8;
+  text-shadow: 0 1px 0 #fff;
 }
 footer {
   text-align: center;

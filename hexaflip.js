@@ -37,7 +37,8 @@
     margin: 10,
     fontSize: 132,
     perspective: 1000,
-    touchSensitivity: 1
+    touchSensitivity: 1,
+    horizontalFlip: false
   };
 
   cssClass = baseName.toLowerCase();
@@ -121,18 +122,19 @@
       this.el.style.width = ((this.size + this.margin * 2) * setsLength) - this.margin * 2 + 'px';
       this.el.style[css.perspective] = this.perspective + 'px';
       this.el.appendChild(cubeFragment);
+      this.eProp = this.horizontalFlip ? 'pageX' : 'pageY';
     }
 
     HexaFlip.prototype._createCube = function(set) {
-      var cube, eString, eventPair, eventPairs, mouseLeaveSupport, rotate3d, side, _fn, _j, _k, _l, _len1, _len2, _len3,
+      var cube, eString, eventPair, eventPairs, mouseLeaveSupport, rotation, side, _fn, _j, _k, _l, _len1, _len2, _len3,
         _this = this;
 
       cube = {
         set: set,
         offset: 0,
-        y1: 0,
-        yDelta: 0,
-        yLast: 0,
+        start: 0,
+        delta: 0,
+        last: 0,
         el: document.createElement('div')
       };
       cube.el.className = "" + cssClass + "-cube " + cssClass + "-cube-" + set;
@@ -143,23 +145,23 @@
         side = faceNames[_j];
         cube[side] = document.createElement('div');
         cube[side].className = cssClass + '-' + side;
-        rotate3d = (function() {
+        rotation = (function() {
           switch (side) {
             case 'front':
-              return '0, 0, 0, 0deg';
+              return '';
             case 'back':
-              return '1, 0, 0, 180deg';
+              return 'rotateX(180deg)';
             case 'top':
-              return '1, 0, 0, 90deg';
+              return 'rotateX(90deg)';
             case 'bottom':
-              return '1, 0, 0, -90deg';
+              return 'rotateX(-90deg)';
             case 'left':
-              return '0, 1, 0, -90deg';
+              return 'rotateY(-90deg)';
             case 'right':
-              return '0, 1, 0, 90deg';
+              return 'rotateY(90deg)';
           }
         })();
-        cube[side].style[css.transform] = "rotate3d(" + rotate3d + ") translate3d(0, 0, " + (this.size / 2) + "px)";
+        cube[side].style[css.transform] = ("" + rotation + " translate3d(0, 0, " + (this.size / 2) + "px)") + (this.horizontalFlip ? 'rotateZ(90deg)' : '');
         cube[side].style.fontSize = this.fontSize;
         cube.el.appendChild(cube[side]);
       }
@@ -188,7 +190,7 @@
     };
 
     HexaFlip.prototype._getTransform = function(deg) {
-      return "translateZ(-" + (this.size / 2) + "px) rotateX(" + deg + "deg)";
+      return (this.horizontalFlip ? 'rotateZ(-90deg)' : '') + (" translateZ(-" + (this.size / 2) + "px) rotateX(" + deg + "deg)");
     };
 
     HexaFlip.prototype._setContent = function(el, content) {
@@ -217,8 +219,8 @@
     HexaFlip.prototype._setSides = function(cube) {
       var bottomAdj, faceOffset, offset, set, setLength, setOffset, topAdj;
 
-      cube.el.style[css.transform] = this._getTransform(cube.yDelta);
-      cube.offset = offset = Math.floor(cube.yDelta / 90);
+      cube.el.style[css.transform] = this._getTransform(cube.delta);
+      cube.offset = offset = Math.floor(cube.delta / 90);
       if (offset === cube.lastOffset) {
         return;
       }
@@ -269,9 +271,9 @@
       cube.touchStarted = true;
       e.currentTarget.classList.add('no-tween');
       if (e.type === 'mousedown') {
-        return cube.y1 = e.pageY;
+        return cube.start = e[this.eProp];
       } else {
-        return cube.y1 = e.touches[0].pageY;
+        return cube.start = e.touches[0][this.eProp];
       }
     };
 
@@ -280,8 +282,8 @@
         return;
       }
       e.preventDefault();
-      cube.diff = (e.pageY - cube.y1) * this.touchSensitivity;
-      cube.yDelta = cube.yLast - cube.diff;
+      cube.diff = (e[this.eProp] - cube.start) * this.touchSensitivity;
+      cube.delta = cube.last - cube.diff;
       return this._setSides(cube);
     };
 
@@ -289,21 +291,21 @@
       var mod;
 
       cube.touchStarted = false;
-      mod = cube.yDelta % 90;
+      mod = cube.delta % 90;
       if (mod < 45) {
-        cube.yLast = cube.yDelta + mod;
+        cube.last = cube.delta + mod;
       } else {
-        if (cube.yDelta > 0) {
-          cube.yLast = cube.yDelta + mod;
+        if (cube.delta > 0) {
+          cube.last = cube.delta + mod;
         } else {
-          cube.yLast = cube.yDelta - (90 - mod);
+          cube.last = cube.delta - (90 - mod);
         }
       }
-      if (cube.yLast % 90 !== 0) {
-        cube.yLast -= cube.yLast % 90;
+      if (cube.last % 90 !== 0) {
+        cube.last -= cube.last % 90;
       }
       cube.el.classList.remove('no-tween');
-      return cube.el.style[css.transform] = this._getTransform(cube.yLast);
+      return cube.el.style[css.transform] = this._getTransform(cube.last);
     };
 
     HexaFlip.prototype._onTouchLeave = function(e, cube) {
@@ -334,7 +336,7 @@
         value = value.toString();
         cube = this.cubes[key];
         index = this.sets[key].indexOf(value);
-        cube.yDelta = cube.yLast = 90 * index;
+        cube.delta = cube.last = 90 * index;
         this._setSides(cube);
         _results.push(this._setContent(cube[faceSequence[index % 4]], value));
       }
@@ -350,7 +352,7 @@
         cube = _ref1[set];
         set = this.sets[set];
         setLength = set.length;
-        offset = cube.yLast / 90;
+        offset = cube.last / 90;
         if (offset < 0) {
           if (-offset > setLength) {
             offset = setLength - -offset % setLength;
@@ -384,7 +386,7 @@
         if (cube.touchStarted) {
           continue;
         }
-        cube.yDelta = cube.yLast += delta;
+        cube.delta = cube.last += delta;
         _results.push(this._setSides(cube));
       }
       return _results;

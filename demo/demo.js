@@ -60,7 +60,8 @@
         return _results;
       })()
     }, {
-      size: 400
+      size: 400,
+      horizontalFlip: true
     });
     photoControls = document.getElementById('photo-controls');
     _ref = ['flipBack', 'flip'];
