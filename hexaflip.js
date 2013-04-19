@@ -144,7 +144,7 @@
       for (_j = 0, _len1 = faceNames.length; _j < _len1; _j++) {
         side = faceNames[_j];
         cube[side] = document.createElement('div');
-        cube[side].className = cssClass + '-' + side;
+        cube[side].className = "" + cssClass + "-" + side;
         rotation = (function() {
           switch (side) {
             case 'front':
@@ -325,9 +325,8 @@
     };
 
     HexaFlip.prototype.setValue = function(settings) {
-      var cube, index, key, value, _results;
+      var cube, index, key, value;
 
-      _results = [];
       for (key in settings) {
         value = settings[key];
         if (!(this.sets[key] && !this.cubes[key].touchStarted)) {
@@ -338,9 +337,9 @@
         index = this.sets[key].indexOf(value);
         cube.delta = cube.last = 90 * index;
         this._setSides(cube);
-        _results.push(this._setContent(cube[faceSequence[index % 4]], value));
+        this._setContent(cube[faceSequence[index % 4]], value);
       }
-      return _results;
+      return this;
     };
 
     HexaFlip.prototype.getValue = function() {
@@ -376,20 +375,19 @@
     };
 
     HexaFlip.prototype.flip = function(back) {
-      var cube, delta, set, _ref1, _results;
+      var cube, delta, set, _ref1;
 
       delta = back ? -90 : 90;
       _ref1 = this.cubes;
-      _results = [];
       for (set in _ref1) {
         cube = _ref1[set];
         if (cube.touchStarted) {
           continue;
         }
         cube.delta = cube.last += delta;
-        _results.push(this._setSides(cube));
+        this._setSides(cube);
       }
-      return _results;
+      return this;
     };
 
     HexaFlip.prototype.flipBack = function() {
