@@ -5,7 +5,7 @@
 # Copyright 2013, MIT License
 
 baseName = 'hexaFlip'
-className = baseName[0].toUpperCase() + baseName.slice 1
+className = baseName[0].toUpperCase() + baseName[1...]
 prefixList = ['webkit', 'Moz', 'O', 'ms']
 
 prefixProp = (prop) ->
