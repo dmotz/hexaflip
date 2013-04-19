@@ -1,5 +1,5 @@
 # hexaFlip
-# 0.0.2
+# 0.0.3
 # Dan Motzenbecker
 # http://oxism.com
 # Copyright 2013, MIT License
@@ -41,8 +41,8 @@ class window.HexaFlip
     unless @sets
       @el.classList.add cssClass + '-timepicker'
       @sets =
-        hour: (i + '' for i in [1..12])
-        minute: (i + '0' for i in [0..5])
+        hour:     (i + '' for i in [1..12])
+        minute:   (i + '0' for i in [0..5])
         meridian: ['am', 'pm']
 
     setsKeys = Object.keys @sets
@@ -75,12 +75,12 @@ class window.HexaFlip
 
   _createCube: (set) ->
     cube =
-      set: set
+      set:    set
       offset: 0
-      start: 0
-      delta: 0
-      last: 0
-      el: document.createElement 'div'
+      start:  0
+      delta:  0
+      last:   0
+      el:     document.createElement 'div'
 
     cube.el.className = "#{ cssClass }-cube #{ cssClass }-cube-#{ set }"
     cube.el.style.margin = "0 #{ @margin }px"
@@ -89,7 +89,7 @@ class window.HexaFlip
 
     for side in faceNames
       cube[side] = document.createElement 'div'
-      cube[side].className = cssClass + '-' + side
+      cube[side].className = "#{ cssClass }-#{ side }"
       rotation = do ->
         switch side
           when 'front'
@@ -232,6 +232,7 @@ class window.HexaFlip
       cube.delta = cube.last = 90 * index
       @_setSides cube
       @_setContent cube[faceSequence[index % 4]], value
+    @
 
 
   getValue: ->
@@ -259,6 +260,7 @@ class window.HexaFlip
       continue if cube.touchStarted
       cube.delta = cube.last += delta
       @_setSides cube
+    @
 
 
   flipBack: ->
