@@ -12,20 +12,27 @@
   -o-transform-style: preserve-3d;
   -ms-transform-style: preserve-3d;
   transform-style: preserve-3d;
+}
+.hexaflip-cube > div {
   -webkit-transition: -webkit-transform 0.4s;
   -moz-transition: -moz-transform 0.4s;
   -o-transition: -o-transform 0.4s;
   -ms-transition: -ms-transform 0.4s;
   transition: transform 0.4s;
+  -webkit-transform-style: preserve-3d;
+  -moz-transform-style: preserve-3d;
+  -o-transform-style: preserve-3d;
+  -ms-transform-style: preserve-3d;
+  transform-style: preserve-3d;
 }
-.hexaflip-cube.no-tween {
+.hexaflip-cube > div.no-tween {
   -webkit-transition-duration: 0;
   -moz-transition-duration: 0;
   -o-transition-duration: 0;
   -ms-transition-duration: 0;
   transition-duration: 0;
 }
-.hexaflip-cube > div {
+.hexaflip-cube .hexaflip-side {
   width: 100%;
   overflow: hidden;
   height: 100.5%;
@@ -44,10 +51,10 @@
   text-shadow: 0 -2px 0 rgba(0,0,0,0.2);
   line-height: 1.5;
 }
-.hexaflip-left,
-.hexaflip-right {
+.hexaflip-side-left,
+.hexaflip-side-right {
   background-color: #555 !important;
 }
-.hexaflip-timepicker .hexaflip-cube:last-child > div:nth-child(odd) {
+.hexaflip-timepicker .hexaflip-cube:last-child .hexaflip-side:nth-child(odd) {
   background-color: #ff575b;
 }

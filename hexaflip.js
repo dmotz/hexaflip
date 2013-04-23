@@ -126,7 +126,7 @@
     }
 
     HexaFlip.prototype._createCube = function(set) {
-      var cube, eString, eventPair, eventPairs, mouseLeaveSupport, rotation, side, _fn, _j, _k, _l, _len1, _len2, _len3,
+      var cube, eString, eventPair, eventPairs, mouseLeaveSupport, rotation, side, sideProto, _fn, _j, _k, _l, _len1, _len2, _len3,
         _this = this;
 
       cube = {
@@ -135,16 +135,19 @@
         start: 0,
         delta: 0,
         last: 0,
-        el: document.createElement('div')
+        el: document.createElement('div'),
+        holder: document.createElement('div')
       };
       cube.el.className = "" + cssClass + "-cube " + cssClass + "-cube-" + set;
       cube.el.style.margin = "0 " + this.margin + "px";
-      cube.el.style.width = cube.el.style.height = this.size + 'px';
-      cube.el.style[css.transform] = this._getTransform(0);
+      cube.el.style.width = cube.el.style.height = cube.holder.style.width = cube.holder.style.height = this.size + 'px';
+      cube.holder.style[css.transform] = this._getTransform(0);
+      sideProto = document.createElement('div');
+      sideProto.classList.add(cssClass + '-side');
       for (_j = 0, _len1 = faceNames.length; _j < _len1; _j++) {
         side = faceNames[_j];
-        cube[side] = document.createElement('div');
-        cube[side].className = "" + cssClass + "-" + side;
+        cube[side] = sideProto.cloneNode(false);
+        cube[side].classList.add("" + cssClass + "-side-" + side);
         rotation = (function() {
           switch (side) {
             case 'front':
@@ -163,8 +166,9 @@
         })();
         cube[side].style[css.transform] = ("" + rotation + " translate3d(0, 0, " + (this.size / 2) + "px)") + (this.horizontalFlip ? 'rotateZ(90deg)' : '');
         cube[side].style.fontSize = this.fontSize;
-        cube.el.appendChild(cube[side]);
+        cube.holder.appendChild(cube[side]);
       }
+      cube.el.appendChild(cube.holder);
       eventPairs = [['TouchStart', 'MouseDown'], ['TouchMove', 'MouseMove'], ['TouchEnd', 'MouseUp'], ['TouchLeave', 'MouseLeave']];
       mouseLeaveSupport = 'onmouseleave' in window;
       for (_k = 0, _len2 = eventPairs.length; _k < _len2; _k++) {
@@ -219,7 +223,7 @@
     HexaFlip.prototype._setSides = function(cube) {
       var bottomAdj, faceOffset, offset, set, setLength, setOffset, topAdj;
 
-      cube.el.style[css.transform] = this._getTransform(cube.delta);
+      cube.holder.style[css.transform] = this._getTransform(cube.delta);
       cube.offset = offset = Math.floor(cube.delta / 90);
       if (offset === cube.lastOffset) {
         return;
@@ -269,7 +273,7 @@
     HexaFlip.prototype._onTouchStart = function(e, cube) {
       e.preventDefault();
       cube.touchStarted = true;
-      e.currentTarget.classList.add('no-tween');
+      cube.holder.classList.add('no-tween');
       if (e.type === 'mousedown') {
         return cube.start = e[this.eProp];
       } else {
@@ -304,8 +308,8 @@
       if (cube.last % 90 !== 0) {
         cube.last -= cube.last % 90;
       }
-      cube.el.classList.remove('no-tween');
-      return cube.el.style[css.transform] = this._getTransform(cube.last);
+      cube.holder.classList.remove('no-tween');
+      return cube.holder.style[css.transform] = this._getTransform(cube.last);
     };
 
     HexaFlip.prototype._onTouchLeave = function(e, cube) {

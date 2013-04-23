@@ -71,33 +71,30 @@ p code {
 .logo {
   margin: 0 auto;
   margin-bottom: 4rem;
-  -webkit-filter: drop-shadow(20px 20px 20px rgba(0,0,0,0.2));
-  -moz-filter: drop-shadow(20px 20px 20px rgba(0,0,0,0.2));
-  filter: drop-shadow(20px 20px 20px rgba(0,0,0,0.2));
 }
 .logo .hexaflip-cube {
   opacity: 0.9;
   filter: alpha(opacity=90);
   -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=90)";
 }
-.logo .hexaflip-cube .hexaflip-left,
-.logo .hexaflip-cube .hexaflip-right {
+.logo .hexaflip-cube .hexaflip-side-left,
+.logo .hexaflip-cube .hexaflip-side-right {
   background-color: #222 !important;
 }
-.logo .hexaflip-cube > div {
+.logo .hexaflip-cube .hexaflip-side {
   font-weight: 100;
   text-shadow: none;
 }
-.logo .hexaflip-cube > div:nth-child(1n+1) {
+.logo .hexaflip-cube .hexaflip-side:nth-child(1n+1) {
   background-color: #069ad5;
 }
-.logo .hexaflip-cube > div:nth-child(2n+2) {
+.logo .hexaflip-cube .hexaflip-side:nth-child(2n+2) {
   background-color: #fc5215;
 }
-.logo .hexaflip-cube > div:nth-child(3n+3) {
+.logo .hexaflip-cube .hexaflip-side:nth-child(3n+3) {
   background-color: #30b71d;
 }
-.logo .hexaflip-cube > div:nth-child(4n+4) {
+.logo .hexaflip-cube .hexaflip-side:nth-child(4n+4) {
   background-color: #eee;
   color: #222;
 }
@@ -135,26 +132,22 @@ p code {
   margin: 0 auto;
   padding-bottom: 3rem;
   margin-bottom: 8rem;
-  -webkit-filter: drop-shadow(0 0 5px rgba(0,0,0,0.2));
-  -moz-filter: drop-shadow(0 0 5px rgba(0,0,0,0.2));
-  filter: drop-shadow(0 0 5px rgba(0,0,0,0.2));
 }
 #photo-controls {
-  width: 110%;
+  width: 120%;
   position: relative;
   top: 18.5rem;
-  left: -5%;
+  left: -10%;
 }
 #photo-controls > div {
   color: #ccc;
   background-color: #444;
-  -webkit-border-radius: 100%;
-  border-radius: 100%;
-  padding: 1rem;
+  -webkit-border-radius: 2px;
+  border-radius: 2px;
+  padding: 2rem 1rem;
   font-size: 2rem;
+  width: 6rem;
   display: inline-block;
-  width: 3rem;
-  height: 3rem;
   font-weight: 200;
   line-height: 0.2;
   text-align: center;
@@ -163,6 +156,7 @@ p code {
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
+  font-style: italic;
 }
 #photo-controls > div:hover {
   opacity: 0.8;
