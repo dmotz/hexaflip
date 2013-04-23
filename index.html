@@ -83,9 +83,42 @@ var cubeSet = new HexaFlip(documentGetElementById('my-el'),
         <p>If a value is a URL, HexaFlip will set that side to the image it points to, preloading it automatically.</p>
 
         <p>
-            You can also pass objects as values with <code>style</code> and <code>value</code> keys.
+            You can also pass objects as values with <code>style</code> and <code>value</code> keys
+            for some meticulous customization of different sides.
             Make the former an object literal of CSS properties to customize the styling of that cube face.
         </p>
+
+<pre>
+<code>
+var colorCube = new HexaFlip(documentGetElementById('color-cube'),
+    {
+        chromaSet: [
+            {
+                value: 'orange',
+                style: {
+                    backgroundColor: '#e67e22',
+                    fontWeight: 100
+                }
+            },
+            {
+                value: 'teal',
+                style: {
+                    backgroundColor: '#1abc9c',
+                    fontFamily: 'Futura'
+                }
+            },
+            {
+                value: 'yellow',
+                style: {
+                    backgroundColor: '#f1c40f',
+                    textDecoration: 'underline'
+                }
+            }
+        ]
+    }
+);
+</code>
+</pre>
 
         <p>To enable horizontal rotation (like the photos above), pass it in the options:</p>
 
