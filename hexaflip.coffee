@@ -81,15 +81,19 @@ class window.HexaFlip
       delta:  0
       last:   0
       el:     document.createElement 'div'
+      holder: document.createElement 'div'
 
     cube.el.className = "#{ cssClass }-cube #{ cssClass }-cube-#{ set }"
     cube.el.style.margin = "0 #{ @margin }px"
-    cube.el.style.width = cube.el.style.height = @size + 'px'
-    cube.el.style[css.transform] = @_getTransform 0
+    cube.el.style.width = cube.el.style.height =
+      cube.holder.style.width = cube.holder.style.height = @size + 'px'
+    cube.holder.style[css.transform] = @_getTransform 0
+    sideProto = document.createElement 'div'
+    sideProto.classList.add cssClass + '-side'
 
     for side in faceNames
-      cube[side] = document.createElement 'div'
-      cube[side].className = "#{ cssClass }-#{ side }"
+      cube[side] = sideProto.cloneNode false
+      cube[side].classList.add "#{ cssClass }-side-#{ side }"
       rotation = do ->
         switch side
           when 'front'
@@ -108,7 +112,9 @@ class window.HexaFlip
       cube[side].style[css.transform] = "#{ rotation } translate3d(0, 0, #{ @size / 2 }px)" +
         (if @horizontalFlip then 'rotateZ(90deg)' else '')
       cube[side].style.fontSize = @fontSize
-      cube.el.appendChild cube[side]
+      cube.holder.appendChild cube[side]
+
+    cube.el.appendChild cube.holder
 
     eventPairs = [['TouchStart', 'MouseDown'], ['TouchMove', 'MouseMove'],
       ['TouchEnd', 'MouseUp'], ['TouchLeave', 'MouseLeave']]
@@ -146,7 +152,7 @@ class window.HexaFlip
 
 
   _setSides: (cube) ->
-    cube.el.style[css.transform] = @_getTransform cube.delta
+    cube.holder.style[css.transform] = @_getTransform cube.delta
     cube.offset = offset = Math.floor cube.delta / 90
     return if offset is cube.lastOffset
     cube.lastOffset = faceOffset = setOffset = offset
@@ -180,7 +186,7 @@ class window.HexaFlip
   _onTouchStart: (e, cube) ->
     e.preventDefault()
     cube.touchStarted = true
-    e.currentTarget.classList.add 'no-tween'
+    cube.holder.classList.add 'no-tween'
     if e.type is 'mousedown'
       cube.start = e[@eProp]
     else
@@ -209,8 +215,8 @@ class window.HexaFlip
     if cube.last % 90 isnt 0
       cube.last -= cube.last % 90
 
-    cube.el.classList.remove 'no-tween'
-    cube.el.style[css.transform] = @_getTransform cube.last
+    cube.holder.classList.remove 'no-tween'
+    cube.holder.style[css.transform] = @_getTransform cube.last
 
 
   _onTouchLeave: (e, cube) ->
