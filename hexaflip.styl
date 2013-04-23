@@ -10,32 +10,35 @@
   display: inline-block
   position: relative
   transform-style: preserve-3d
-  transition: transform .4s
-
-  &.no-tween
-    transition-duration: 0
 
   > div
-    width: 100%
-    overflow: hidden
-    height: 100.5%
-    position: absolute
-    user-select: none
-    background-size: cover
-    text-align: center
-    background-color: #333
-    color: #fff
-    font-weight: 100
-    text-shadow: 0 -2px 0 rgba(0, 0, 0, .2)
-    line-height: 1.5
+    transition: transform .4s
+    transform-style: preserve-3d
+
+    &.no-tween
+      transition-duration: 0
+
+    > div
+      width: 100%
+      overflow: hidden
+      height: 100.5%
+      position: absolute
+      user-select: none
+      background-size: cover
+      text-align: center
+      background-color: #333
+      color: #fff
+      font-weight: 100
+      text-shadow: 0 -2px 0 rgba(0, 0, 0, .2)
+      line-height: 1.5
 
 
-.hexaflip-left, .hexaflip-right
+.hexaflip-side-left, .hexaflip-side-right
   background-color: #555 !important
 
 
 .hexaflip-timepicker
   .hexaflip-cube:last-child
-    > div:nth-child(odd)
+    .hexaflip-side:nth-child(odd)
       background-color: #ff575b
 
