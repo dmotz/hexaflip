@@ -26,11 +26,11 @@
   transform-style: preserve-3d;
 }
 .hexaflip-cube > div.no-tween {
-  -webkit-transition-duration: 0;
-  -moz-transition-duration: 0;
-  -o-transition-duration: 0;
-  -ms-transition-duration: 0;
-  transition-duration: 0;
+  -webkit-transition-duration: 0s;
+  -moz-transition-duration: 0s;
+  -o-transition-duration: 0s;
+  -ms-transition-duration: 0s;
+  transition-duration: 0s;
 }
 .hexaflip-cube .hexaflip-side {
   width: 100%;
