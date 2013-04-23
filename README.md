@@ -33,27 +33,27 @@ Make the former an object literal of CSS properties to customize the styling of 
 var colorCube = new HexaFlip(documentGetElementById('color-cube'),
     {
         chromaSet: [
-{
-    value: 'orange',
-    style: {
-        backgroundColor: '#e67e22',
-        fontWeight: 100
-    }
-},
-{
-    value: 'teal',
-    style: {
-        backgroundColor: '#1abc9c',
-        fontFamily: 'Futura'
-    }
-},
-{
-    value: 'yellow',
-    style: {
-        backgroundColor: '#f1c40f',
-        textDecoration: 'underline'
-    }
-}
+          {
+              value: 'orange',
+              style: {
+                  backgroundColor: '#e67e22',
+                  fontWeight: 100
+              }
+          },
+          {
+              value: 'teal',
+              style: {
+                  backgroundColor: '#1abc9c',
+                  fontFamily: 'Futura'
+              }
+          },
+          {
+              value: 'yellow',
+              style: {
+                  backgroundColor: '#f1c40f',
+                  textDecoration: 'underline'
+              }
+          }
         ]
     }
 );
@@ -65,7 +65,7 @@ To enable horizontal rotation (like the photos above), pass it in the options:
 var horizontalCube = new HexaFlip(documentGetElementById('my-el2'),
     {
         letters: ['α', 'β', 'γ', 'δ', 'ε', 'ζ', 'η', 'θ', 'ι', 'κ', 'λ', 'μ',
-      'ν', 'ξ', 'ο', 'π', 'ρ', 'σ', 'τ', 'υ', 'φ', 'χ', 'ψ', 'ω']
+                  'ν', 'ξ', 'ο', 'π', 'ρ', 'σ', 'τ', 'υ', 'φ', 'χ', 'ψ', 'ω']
     },
     {
         horizontalFlip: true,
