@@ -1,9 +1,4 @@
 @import 'nib'
-$drop = drop-shadow(20px 20px 20px rgba(0, 0, 0, .2))
-$shadow()
-  -webkit-filter: $drop
-  -moz-filter: $drop
-  filter: $drop
 
 *
   box-sizing: border-box
@@ -46,9 +41,7 @@ h1
 
 h2
   font-size: 2.4rem
-  //margin: 0rem
   font-weight: 200
-  //letter-spacing: -1px
   color: #888
   line-height: 1.5
   font-style: italic
@@ -79,15 +72,14 @@ p
 .logo
   margin: 0 auto
   margin-bottom: 4rem
-  $shadow()
 
   .hexaflip-cube
     opacity: .9
 
-    .hexaflip-left, .hexaflip-right
+    .hexaflip-side-left, .hexaflip-side-right
       background-color: #222 !important
 
-    > div
+    .hexaflip-side
       font-weight: 100
       text-shadow: none
 
@@ -127,37 +119,33 @@ p
       background-color: #888
 
 
-$photoDrop = drop-shadow(0 0 5px rgba(0, 0, 0, .2))
 #photo-demo
   text-align: center
   margin: 0 auto
   padding-bottom: 3rem
   margin-bottom: 8rem
-  -webkit-filter: $photoDrop
-  -moz-filter: $photoDrop
-  filter: $photoDrop
 
 
 #photo-controls
-  width: 110%
+  width: 120%
   position: relative
   top: 18.5rem
-  left: -5%
+  left: -10%
 
   > div
     color: #ccc
     background-color: #444
-    border-radius: 100%
-    padding: 1rem
+    border-radius: 2px
+    padding: 2rem 1rem
     font-size: 2rem
+    width: 6rem
     display: inline-block
-    width: 3rem
-    height: 3rem
     font-weight: 200
     line-height: 0.2
     text-align: center
     cursor: pointer
     user-select: none
+    font-style: italic
 
     &:hover
       opacity: .8
