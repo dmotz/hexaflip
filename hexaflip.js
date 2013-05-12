@@ -51,7 +51,8 @@
 
   window.HexaFlip = (function() {
     function HexaFlip(el, sets, options) {
-      var cube, cubeFragment, i, key, midPoint, option, set, setsKeys, setsLength, val, value, z, _j, _len1, _ref1, _ref2;
+      var cube, cubeFragment, fn, i, key, midPoint, option, set, setsKeys, setsLength, type, val, value, z, _fn, _j, _len1, _ref1, _ref2, _ref3,
+        _this = this;
 
       this.el = el;
       this.sets = sets;
@@ -123,6 +124,24 @@
       this.el.style[css.perspective] = this.perspective + 'px';
       this.el.appendChild(cubeFragment);
       this.eProp = this.horizontalFlip ? 'pageX' : 'pageY';
+      if (this.domEvents) {
+        _ref3 = this.domEvents;
+        _fn = function(fn) {
+          return _this.el.addEventListener(type, function(e) {
+            var target;
+
+            target = e.target;
+            if (target.classList.contains("" + cssClass + "-side")) {
+              return fn.call(_this, e, target, target.parentNode.parentNode);
+            }
+          }, false);
+        };
+        for (type in _ref3) {
+          fn = _ref3[type];
+          _fn(fn);
+        }
+        this.domEvents = null;
+      }
     }
 
     HexaFlip.prototype._createCube = function(set) {
