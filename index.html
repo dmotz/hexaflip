@@ -155,6 +155,38 @@ cubeSet.flipBack();
 </code>
 </pre>
 
+
+        <h3>Events</h3>
+
+        <p>To add custom DOM events, simply pass a key value object called <code>events</code> to the instance's options:</p>
+
+<pre>
+<code>
+//...
+    },
+    {
+        events: {
+            mouseover: function(e, face, cube) {
+                face.style.backgroundColor = 'red';
+            },
+            mouseout: function(e, face, cube) {
+                face.style.backgroundColor = 'blue';
+            },
+            click: function(e, face, cube) {
+                console.log(face.innerHTML);
+            }
+        }
+    }
+);
+</code>
+</pre>
+
+        <p>
+            Every callback is passed the event object, the face element that triggered the event, and the cube
+            element the face belongs to. The callback is automatically bound to the HexaFlip instance
+            so <code>this</code> works properly.
+        </p>
+
         <p>
             For a more detailed guide, read the <a href="http://tympanus.net/codrops/2013/03/07/hexaflip-a-flexible-3d-cube-plugin/">Codrops article</a>.
         </p>
