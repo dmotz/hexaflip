@@ -72,6 +72,16 @@ class window.HexaFlip
     @el.appendChild cubeFragment
     @eProp = if @horizontalFlip then 'pageX' else 'pageY'
 
+    if @domEvents
+      for type, fn of @domEvents then do (fn) =>
+        @el.addEventListener type, (e) =>
+          {target} = e
+          if target.classList.contains "#{ cssClass }-side"
+            fn.call @, e, target, target.parentNode.parentNode
+        , false
+
+      @domEvents = null
+
 
   _createCube: (set) ->
     cube =
