@@ -87,3 +87,31 @@ To rotate the cubes to the next or previous sides:
 cubeSet.flip();
 cubeSet.flipBack();
 ```
+
+## Events
+
+To add custom DOM events, simply pass a key value object called `events` to the instance's options:
+
+```javascript
+//...
+    },
+    {
+        events: {
+            mouseover: function(e, face, cube) {
+                face.style.backgroundColor = 'red';
+            },
+            mouseout: function(e, face, cube) {
+                face.style.backgroundColor = 'blue';
+            },
+            click: function(e, face, cube) {
+                console.log(face.innerHTML);
+            }
+        }
+    }
+);
+```
+
+Every callback is passed the event object, the face element that triggered the event, and the cube
+element the face belongs to. The callback is automatically bound to the HexaFlip instance
+so `this` works properly.
+
