@@ -10,13 +10,15 @@ print = (fn) ->
     fn?()
 
 
-task 'build', 'Build and minify HexaFlip', ->
+task 'build', 'compile and minify library, build demo site assets', ->
   exec "stylus #{ nibArg } hexaflip.styl", print()
+  exec "stylus #{ nibArg } ./demo/demo.styl -o ./demo", print()
+  exec 'coffee -c ./demo/demo.coffee', print()
   exec 'coffee -mc hexaflip.coffee', print ->
     exec 'uglifyjs -o hexaflip.min.js hexaflip.js', print()
 
 
-task 'watch', 'Build HexaFlip continuously', ->
+task 'watch', 'compile continuously', ->
   coffee = spawn 'coffee', ['-mwc', 'hexaflip.coffee']
   coffee.stdout.on 'data', output
   coffee.stderr.on 'data', output
