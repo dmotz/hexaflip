@@ -4,8 +4,8 @@
 # http://oxism.com
 # Copyright 2013, MIT License
 
-baseName = 'hexaFlip'
-className = baseName[0].toUpperCase() + baseName[1...]
+baseName   = 'hexaFlip'
+className  = baseName[0].toUpperCase() + baseName[1...]
 prefixList = ['webkit', 'Moz', 'O', 'ms']
 
 prefixProp = (prop) ->
@@ -19,12 +19,12 @@ css = {}
 css[prop.toLowerCase()] = prefixProp prop for prop in ['Transform', 'Perspective']
 
 defaults =
-  size: 200
-  margin: 10
-  fontSize: 132
-  perspective: 1000
+  size:             200
+  margin:           10
+  fontSize:         132
+  perspective:      1000
   touchSensitivity: 1
-  horizontalFlip: false
+  horizontalFlip:   false
 
 cssClass = baseName.toLowerCase()
 faceNames = ['front', 'bottom', 'back', 'top', 'left', 'right']
@@ -45,12 +45,12 @@ class window.HexaFlip
         minute:   (i + '0' for i in [0..5])
         meridian: ['am', 'pm']
 
-    setsKeys = Object.keys @sets
-    setsLength = setsKeys.length
+    setsKeys     = Object.keys @sets
+    setsLength   = setsKeys.length
     cubeFragment = document.createDocumentFragment()
     i = z = 0
     midPoint = setsLength / 2 + 1
-    @cubes = {}
+    @cubes   = {}
     for key, set of @sets
       cube = @cubes[key] = @_createCube key
       if ++i < midPoint
@@ -67,7 +67,7 @@ class window.HexaFlip
 
     @el.classList.add cssClass
     @el.style.height = @size + 'px'
-    @el.style.width = ((@size + @margin * 2) * setsLength) - @margin * 2 + 'px'
+    @el.style.width  = ((@size + @margin * 2) * setsLength) - @margin * 2 + 'px'
     @el.style[css.perspective] = @perspective + 'px'
     @el.appendChild cubeFragment
     @eProp = if @horizontalFlip then 'pageX' else 'pageY'
@@ -93,10 +93,10 @@ class window.HexaFlip
       el:     document.createElement 'div'
       holder: document.createElement 'div'
 
-    cube.el.className = "#{ cssClass }-cube #{ cssClass }-cube-#{ set }"
+    cube.el.className    = "#{ cssClass }-cube #{ cssClass }-cube-#{ set }"
     cube.el.style.margin = "0 #{ @margin }px"
-    cube.el.style.width = cube.el.style.height =
-      cube.holder.style.width = cube.holder.style.height = @size + 'px'
+    cube.el.style.width  = cube.el.style.height = \
+    cube.holder.style.width = cube.holder.style.height = @size + 'px'
     cube.holder.style[css.transform] = @_getTransform 0
     sideProto = document.createElement 'div'
     sideProto.classList.add cssClass + '-side'
@@ -150,7 +150,7 @@ class window.HexaFlip
     return unless el and content
     if typeof content is 'object'
       {style, value} = content
-      el.style[key] = val for key, val of style
+      el.style[key]  = val for key, val of style
     else
       value = content
 
@@ -183,12 +183,12 @@ class window.HexaFlip
         else
           faceOffset = 4 + offset
 
-    setOffset %= setLength if setOffset >= setLength
+    setOffset  %= setLength if setOffset >= setLength
     faceOffset %= 4 if faceOffset >= 4
-    topAdj = faceOffset - 1
-    bottomAdj = faceOffset + 1
-    topAdj = 3 if topAdj is -1
-    bottomAdj = 0 if bottomAdj is 4
+    topAdj      = faceOffset - 1
+    bottomAdj   = faceOffset + 1
+    topAdj      = 3 if topAdj is -1
+    bottomAdj   = 0 if bottomAdj is 4
     @_setContent cube[faceSequence[topAdj]], set[setOffset - 1] or set[setLength - 1]
     @_setContent cube[faceSequence[bottomAdj]], set[setOffset + 1] or set[0]
 
@@ -243,7 +243,7 @@ class window.HexaFlip
     for key, value of settings
       continue unless @sets[key] and !@cubes[key].touchStarted
       value = value.toString()
-      cube = @cubes[key]
+      cube  = @cubes[key]
       index = @sets[key].indexOf value
       cube.delta = cube.last = 90 * index
       @_setSides cube
@@ -253,9 +253,9 @@ class window.HexaFlip
 
   getValue: ->
     for set, cube of @cubes
-      set = @sets[set]
+      set       = @sets[set]
       setLength = set.length
-      offset = cube.last / 90
+      offset    = cube.last / 90
       if offset < 0
         if -offset > setLength
           offset = setLength - -offset % setLength
