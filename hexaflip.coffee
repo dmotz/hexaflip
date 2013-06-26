@@ -197,16 +197,20 @@ class window.HexaFlip
     e.preventDefault()
     cube.touchStarted = true
     cube.holder.classList.add 'no-tween'
-    if e.type is 'mousedown'
-      cube.start = e[@eProp]
-    else
+    if e.type is 'touchstart'
       cube.start = e.touches[0][@eProp]
+    else
+      cube.start = e[@eProp]
 
 
   _onTouchMove: (e, cube) ->
     return unless cube.touchStarted
     e.preventDefault()
-    cube.diff = (e[@eProp] - cube.start) * @touchSensitivity
+    if e.type is 'touchmove'
+      cube.diff = (e.touches[0][@eProp] - cube.start) * @touchSensitivity
+    else
+      cube.diff = (e[@eProp] - cube.start) * @touchSensitivity
+
     cube.delta = cube.last - cube.diff
     @_setSides cube
 
