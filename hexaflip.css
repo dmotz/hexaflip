@@ -5,6 +5,7 @@
   cursor: move;
   cursor: -webkit-grab;
   cursor: -moz-grab;
+  cursor: grab;
   display: inline-block;
   position: relative;
   -webkit-transform-style: preserve-3d;
@@ -12,6 +13,12 @@
   -o-transform-style: preserve-3d;
   -ms-transform-style: preserve-3d;
   transform-style: preserve-3d;
+}
+.hexaflip-cube:active {
+  cursor: move;
+  cursor: -webkit-grabbing;
+  cursor: -moz-grabbing;
+  cursor: grabbing;
 }
 .hexaflip-cube > div {
   -webkit-transition: -webkit-transform 0.4s;

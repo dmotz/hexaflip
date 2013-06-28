@@ -7,9 +7,16 @@
   cursor: move
   cursor: -webkit-grab
   cursor: -moz-grab
+  cursor: grab
   display: inline-block
   position: relative
   transform-style: preserve-3d
+
+  &:active
+    cursor: move
+    cursor: -webkit-grabbing
+    cursor: -moz-grabbing
+    cursor: grabbing
 
   > div
     transition: transform .4s
