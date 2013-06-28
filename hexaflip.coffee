@@ -156,9 +156,9 @@ class window.HexaFlip
 
     if urlRx.test value
       el.innerHTML = ''
-      el.style.backgroundImage = "url(#{ value })"
+      el.style.backgroundImage = "url('#{ value }')"
     else
-      el.style.backgroundImage = "none"
+      el.style.backgroundImage = 'none'
       el.innerHTML = value
 
 
