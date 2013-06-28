@@ -158,6 +158,7 @@ class window.HexaFlip
       el.innerHTML = ''
       el.style.backgroundImage = "url(#{ value })"
     else
+      el.style.backgroundImage = "none"
       el.innerHTML = value
 
 
