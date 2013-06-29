@@ -415,7 +415,7 @@
   })();
 
   if ((window.jQuery != null) || (((_ref1 = window.$) != null ? _ref1.data : void 0) != null)) {
-    $.fn.hexaFlip = function(sets, options) {
+    $.prototype.hexaFlip = function(sets, options) {
       var args, el, instance, methodName, _j, _k, _len1, _len2;
       if (!css.transform) {
         return this;

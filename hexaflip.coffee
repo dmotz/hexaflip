@@ -1,5 +1,5 @@
 # HexaFlip
-# 0.0.6
+# 0.0.7
 # Dan Motzenbecker
 # http://oxism.com
 # Copyright 2013, MIT License
@@ -289,7 +289,7 @@ class window.HexaFlip
 
 
 if window.jQuery? or window.$?.data?
-  $.fn.hexaFlip = (sets, options) ->
+  $::hexaFlip = (sets, options) ->
     return @ unless css.transform
     if typeof sets is 'string'
       methodName = sets
