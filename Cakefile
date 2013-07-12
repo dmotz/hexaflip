@@ -18,10 +18,10 @@ task 'build', 'compile and minify library, build demo site assets', ->
 
 
 task 'watch', 'compile continuously', ->
-  coffee     = spawn 'coffee', ['-mwc', 'hexaflip.coffee']
-  stylus     = spawn 'stylus', ['-u', 'nib', '-w', 'hexaflip.styl']
-  demoCoffee = spawn 'coffee', ['-mwc', 'demo/demo.coffee']
-  demoStylus = spawn 'stylus', ['-u', 'nib', '-w', 'demo/demo.styl']
+  coffee     = spawn 'coffee', '-mwc hexaflip.coffee'.split ' '
+  stylus     = spawn 'stylus', '-u nib -w hexaflip.styl'.split ' '
+  demoCoffee = spawn 'coffee', '-mwc demo/demo.coffee'.split ' '
+  demoStylus = spawn 'stylus', '-u nib -w demo/demo.styl'.split ' '
 
   for proc in [coffee, stylus, demoCoffee, demoStylus]
     proc.stdout.on 'data', output
