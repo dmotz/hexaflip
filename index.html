@@ -13,7 +13,7 @@
     <div class="logo"></div>
     <div class="logo"></div>
 
-    <section>
+    <section id="intro">
         <h1><em>HexaFlip</em> visualizes arrays as cube interfaces.</h1>
         <h2>Transform arrays of any length into cubes with infinite sides.</h2>
         <h2>Featuring touch/mouse interaction, getter/setter methods, zero dependencies, and jQuery support.</h2>
@@ -27,7 +27,7 @@
 
     </section>
 
-    <section>
+    <section id="photos">
         <h1>Like photos:</h1>
 
         <div id="photo-controls">
@@ -38,14 +38,14 @@
         <div id="photo-demo"></div>
     </section>
 
-    <section>
+    <section id="time">
         <h1>Or time:</h1>
 
         <div id="time-demo"></div>
     </section>
 
     <section>
-        <h3>About</h3>
+        <h3 id="about">About</h3>
 
         <p>
             HexaFlip was born out of the time-picker interface in the iPhone app
@@ -66,7 +66,7 @@
             <a href="https://twitter.com/dcmotz">Follow me on twitter</a> for updates and other experiments.
         </p>
 
-        <h3>Basic Usage</h3>
+        <h3 id="basic-usage">Basic Usage</h3>
 
         <p>Create an instance by passing a DOM element and a key-value set of arrays:</p>
 
@@ -157,9 +157,12 @@ cubeSet.flipBack();
 </pre>
 
 
-        <h3>Events</h3>
+        <h3 id="events">Events</h3>
 
-        <p>To add custom DOM events, simply pass a key value object called <code>events</code> to the instance's options:</p>
+        <p>
+            To add custom DOM events, simply pass a key value object called
+            <code>events</code> to the instance's options:
+        </p>
 
 <pre>
 <code>
