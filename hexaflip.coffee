@@ -293,13 +293,13 @@ $::hexaFlip = (sets, options) ->
   return @ unless css.transform
   if typeof sets is 'string'
     methodName = sets
-    return @ unless typeof HexaFlip::[methodName] is 'function'
-    for el in @
-      return unless instance = $.data el, baseName
-      args = Array::slice.call arguments
-      args.shift()
-      instance[methodName] args
-    @
+    return @ unless typeof HexaFlip::[methodName] is 'function' and
+      instance = $.data @[0], baseName
+
+    args = Array::slice.call arguments
+    args.shift()
+    instance[methodName] args
+
   else
     for el in @
       continue if $.data el, baseName
