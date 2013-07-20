@@ -288,22 +288,22 @@ class window.HexaFlip
     @flip true
 
 
-if window.jQuery? or window.$?.data?
-  $::hexaFlip = (sets, options) ->
-    return @ unless css.transform
-    if typeof sets is 'string'
-      methodName = sets
-      return @ unless typeof HexaFlip::[methodName] is 'function'
-      for el in @
-        return unless instance = $.data el, baseName
-        args = Array::slice.call arguments
-        args.shift()
-        instance[methodName] args
-      @
-    else
-      for el in @
-        if instance = $.data el, baseName
-          return instance
-        else
-          $.data el, baseName, new HexaFlip el, sets, options
+return unless ($ = window.jQuery or window.$) and $.data
+$::hexaFlip = (sets, options) ->
+  return @ unless css.transform
+  if typeof sets is 'string'
+    methodName = sets
+    return @ unless typeof HexaFlip::[methodName] is 'function'
+    for el in @
+      return unless instance = $.data el, baseName
+      args = Array::slice.call arguments
+      args.shift()
+      instance[methodName] args
+    @
+  else
+    for el in @
+      if instance = $.data el, baseName
+        return instance
+      else
+        $.data el, baseName, new HexaFlip el, sets, options
 
