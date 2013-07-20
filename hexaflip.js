@@ -46,7 +46,7 @@
 
   faceSequence = faceNames.slice(0, 4);
 
-  urlRx = /^((((https?)|(file)):)?\/\/)|(data:)|(\.\.?\/)/i;
+  urlRx = /^(?:(?:(?:(?:https?)|(?:file)):)?\/\/)|(?:data:)|(?:(?:\.\.?)?\/)/i;
 
   window.HexaFlip = (function() {
     function HexaFlip(el, sets, options) {
