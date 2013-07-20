@@ -302,8 +302,7 @@ $::hexaFlip = (sets, options) ->
     @
   else
     for el in @
-      if instance = $.data el, baseName
-        return instance
-      else
-        $.data el, baseName, new HexaFlip el, sets, options
+      continue if $.data el, baseName
+      $.data el, baseName, new HexaFlip el, sets, options
+    @
 
