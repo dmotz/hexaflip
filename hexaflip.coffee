@@ -26,10 +26,10 @@ defaults =
   touchSensitivity: 1
   horizontalFlip:   false
 
-cssClass = baseName.toLowerCase()
-faceNames = ['front', 'bottom', 'back', 'top', 'left', 'right']
+cssClass     = baseName.toLowerCase()
+faceNames    = ['front', 'bottom', 'back', 'top', 'left', 'right']
 faceSequence = faceNames[...4]
-urlRx = /^(?:(?:(?:(?:https?)|(?:file)):)?\/\/)|(?:data:)|(?:(?:\.\.?)?\/)/i
+urlRx        = /^(?:(?:(?:(?:https?)|(?:file)):)?\/\/)|(?:data:)|(?:(?:\.\.?)?\/)/i
 
 class window.HexaFlip
 
