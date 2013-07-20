@@ -3,7 +3,8 @@
     "title": "HexaFlip",
     "description": "HexaFlip visualizes arrays as cube interfaces.",
     "keywords": [
-        "effect",
+        "timepicker",
+        "3d",
         "cube",
         "UI",
         "touch"
