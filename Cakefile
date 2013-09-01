@@ -1,12 +1,16 @@
 {exec, spawn} = require 'child_process'
 
-output = (data) -> console.log data.toString()
-
-print  = (fn) ->
+print = (fn) ->
   (err, stdout, stderr) ->
     throw err if err
     console.log stdout, stderr
     fn?()
+
+
+startWatcher = (bin, args) ->
+  watcher = spawn bin, args?.split ' '
+  watcher.stdout.pipe process.stdout
+  watcher.stderr.pipe process.stderr
 
 
 task 'build', 'compile and minify library, build demo site assets', ->
@@ -18,11 +22,9 @@ task 'build', 'compile and minify library, build demo site assets', ->
 
 
 task 'watch', 'compile continuously', ->
-  coffee     = spawn 'coffee', '-mwc hexaflip.coffee'.split ' '
-  stylus     = spawn 'stylus', '-u nib -w hexaflip.styl'.split ' '
-  demoCoffee = spawn 'coffee', '-mwc demo/demo.coffee'.split ' '
-  demoStylus = spawn 'stylus', '-u nib -w demo/demo.styl'.split ' '
-
-  for proc in [coffee, stylus, demoCoffee, demoStylus]
-    proc.stdout.on 'data', output
-    proc.stderr.on 'data', output
+  startWatcher.apply @, pair for pair in [
+    ['coffee', '-mwc hexaflip.coffee']
+    ['stylus', '-u nib -w hexaflip.styl']
+    ['coffee', '-mwc demo/demo.coffee']
+    ['stylus', '-u nib -w demo/demo.styl']
+  ]
