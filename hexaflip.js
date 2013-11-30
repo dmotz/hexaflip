@@ -37,7 +37,8 @@
     fontSize: 132,
     perspective: 1000,
     touchSensitivity: 1,
-    horizontalFlip: false
+    horizontalFlip: false,
+    domEvents: null
   };
 
   cssClass = baseName.toLowerCase();
