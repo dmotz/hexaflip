@@ -36,6 +36,7 @@ class window.HexaFlip
 
   constructor: (@el, @sets, @options = {}) ->
     return unless css.transform and @el
+    return new HexaFlip arguments... unless @ instanceof HexaFlip
     @[option] = @options[option] ? defaults[option] for option, value of defaults
     @fontSize += 'px' if typeof @fontSize is 'number'
 
