@@ -78,6 +78,9 @@ var cubeSet = new HexaFlip(documentGetElementById('my-el'),
         curtis: ['Curtis', 'Roots', 'Super Fly', 'Back to the World', 'Got to Find a Way', 'Sweet Exorcist']
     }
 );
+
+// you can also pass a selector string and HexaFlip will take the first matching element:
+var firstDiv = new HexaFlip('div');
 </code>
 </pre>
 
@@ -91,7 +94,7 @@ var cubeSet = new HexaFlip(documentGetElementById('my-el'),
 
 <pre>
 <code>
-var colorCube = new HexaFlip(documentGetElementById('color-cube'),
+var colorCube = new HexaFlip('#color-cube',
     {
         chromaSet: [
             {
@@ -125,7 +128,7 @@ var colorCube = new HexaFlip(documentGetElementById('color-cube'),
 
 <pre>
 <code>
-var horizontalCube = new HexaFlip(documentGetElementById('my-el2'),
+var horizontalCube = new HexaFlip('#my-el2',
     {
         letters: ['α', 'β', 'γ', 'δ', 'ε', 'ζ', 'η', 'θ', 'ι', 'κ', 'λ', 'μ',
                   'ν', 'ξ', 'ο', 'π', 'ρ', 'σ', 'τ', 'υ', 'φ', 'χ', 'ψ', 'ω']

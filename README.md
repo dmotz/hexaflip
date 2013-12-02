@@ -20,6 +20,9 @@ var cubeSet = new HexaFlip(documentGetElementById('my-el'),
         curtis: ['Curtis', 'Roots', 'Super Fly', 'Back to the World', 'Got to Find a Way', 'Sweet Exorcist']
     }
 );
+
+// you can also pass a selector string and HexaFlip will take the first matching element:
+var firstDiv = new HexaFlip('div');
 ```
 
 If a value is a URL, HexaFlip will set that side to the image it points to, preloading it automatically.
@@ -30,7 +33,7 @@ Make the former an object literal of CSS properties to customize the styling of 
 
 
 ```javascript
-var colorCube = new HexaFlip(documentGetElementById('color-cube'),
+var colorCube = new HexaFlip('#color-cube',
     {
         chromaSet: [
           {
@@ -62,7 +65,7 @@ var colorCube = new HexaFlip(documentGetElementById('color-cube'),
 To enable horizontal rotation (like the photos above), pass it in the options:
 
 ```javascript
-var horizontalCube = new HexaFlip(documentGetElementById('my-el2'),
+var horizontalCube = new HexaFlip('#my-el2',
     {
         letters: ['α', 'β', 'γ', 'δ', 'ε', 'ζ', 'η', 'θ', 'ι', 'κ', 'λ', 'μ',
                   'ν', 'ξ', 'ο', 'π', 'ρ', 'σ', 'τ', 'υ', 'φ', 'χ', 'ψ', 'ω']
