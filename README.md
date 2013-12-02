@@ -90,13 +90,13 @@ cubeSet.flipBack();
 
 ## Events
 
-To add custom DOM events, simply pass a key value object called `events` to the instance's options:
+To add custom DOM events, simply pass a key value object called `domEvents` to the instance's options:
 
 ```javascript
 //...
     },
     {
-        events: {
+        domEvents: {
             mouseover: function(e, face, cube) {
                 face.style.backgroundColor = 'red';
             },

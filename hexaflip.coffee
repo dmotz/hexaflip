@@ -25,6 +25,7 @@ defaults =
   perspective:      1000
   touchSensitivity: 1
   horizontalFlip:   false
+  domEvents:        null
 
 cssClass     = baseName.toLowerCase()
 faceNames    = ['front', 'bottom', 'back', 'top', 'left', 'right']
