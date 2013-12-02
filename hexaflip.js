@@ -59,6 +59,16 @@
       if (!(css.transform && this.el)) {
         return;
       }
+      if (!(this instanceof HexaFlip)) {
+        return (function(func, args, ctor) {
+          ctor.prototype = func.prototype;
+          var child = new ctor, result = func.apply(child, args);
+          return Object(result) === result ? result : child;
+        })(HexaFlip, arguments, function(){});
+      }
+      if (typeof this.el === 'string') {
+        this.el = document.querySelector(this.el);
+      }
       for (option in defaults) {
         value = defaults[option];
         this[option] = (_ref1 = this.options[option]) != null ? _ref1 : defaults[option];
