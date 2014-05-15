@@ -406,17 +406,25 @@
       return _results;
     };
 
+    HexaFlip.prototype.flipCube = function(key, back) {
+      var cube;
+      cube = this.cubes[key];
+      if (cube.touchStarted) {
+        return;
+      }
+      cube.delta = cube.last += back ? -90 : 90;
+      this._setSides(cube);
+      return this;
+    };
+
+    HexaFlip.prototype.flipCubeBack = function(key) {
+      return this.flipCube(key, true);
+    };
+
     HexaFlip.prototype.flip = function(back) {
-      var cube, delta, set, _ref1;
-      delta = back ? -90 : 90;
-      _ref1 = this.cubes;
-      for (set in _ref1) {
-        cube = _ref1[set];
-        if (cube.touchStarted) {
-          continue;
-        }
-        cube.delta = cube.last += delta;
-        this._setSides(cube);
+      var key;
+      for (key in this.cubes) {
+        this.flipCube(key, back);
       }
       return this;
     };
