@@ -107,7 +107,7 @@ class window.HexaFlip
     for side in faceNames
       cube[side] = sideProto.cloneNode false
       cube[side].classList.add "#{ cssClass }-side-#{ side }"
-      rotation = do ->
+      rotation =
         switch side
           when 'front'
             ''
