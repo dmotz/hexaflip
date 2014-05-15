@@ -278,12 +278,20 @@ class window.HexaFlip
         set[offset]
 
 
+  flipCube: (key, back) ->
+    cube = @cubes[key]
+    return if cube.touchStarted
+    cube.delta = cube.last += if back then -90 else 90
+    @_setSides cube
+    @
+
+
+  flipCubeBack: (key) ->
+    @flipCube key, true
+
+
   flip: (back) ->
-    delta = if back then -90 else 90
-    for set, cube of @cubes
-      continue if cube.touchStarted
-      cube.delta = cube.last += delta
-      @_setSides cube
+    @flipCube key, back for key of @cubes
     @
 
 
