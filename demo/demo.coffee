@@ -1,9 +1,11 @@
-text1 = 'HEXA'.split ''
-text2 = 'FLIP'.split ''
+demoText = [
+  'HEXA'.split ''
+  'FLIP'.split ''
+]
 logoSettings =
-    size: 120,
-    margin: 8,
-    fontSize: 82,
+    size:        120
+    margin:      8
+    fontSize:    82
     perspective: 450
 
 makeObj = (a) ->
@@ -25,9 +27,8 @@ getSeq = (a, reverse, random) ->
   o
 
 document.addEventListener 'DOMContentLoaded', ->
-  logos = document.getElementsByClassName 'logo'
-  hexaLogo1 = new HexaFlip logos[0], makeObj(text1), logoSettings
-  hexaLogo2 = new HexaFlip logos[1], makeObj(text2), logoSettings
+  logos     = document.getElementsByClassName 'logo'
+  textDemos = (new HexaFlip logos[n], makeObj(demoText[n]), logoSettings for n in [0..1])
   hexaPhoto = new HexaFlip document.getElementById('photo-demo'),
     {photos: ("./demo/images/#{ i }.jpg" for i in [1..18])},
     size: 400
@@ -41,30 +42,30 @@ document.addEventListener 'DOMContentLoaded', ->
   hexaTime = new HexaFlip document.getElementById('time-demo'), null, size: 150, fontSize: 100
 
   setTimeout ->
-    hexaLogo1.setValue getSeq text1, true
-    hexaLogo2.setValue getSeq text2, true
+    textDemos[n].setValue getSeq demoText[n], true for n in [0..1]
+    null
   , 0
 
   setTimeout ->
-    hexaLogo1.setValue getSeq text1
-    hexaLogo2.setValue getSeq text2
+    textDemos[n].setValue getSeq demoText[n] for n in [0..1]
+    null
   , 1000
 
   setTimeout ->
       setInterval ->
-          hexaLogo1.setValue getSeq text1, false, true
-          hexaLogo2.setValue getSeq text2, false, true
+          textDemos[n].setValue getSeq demoText[n], false, true for n in [0..1]
+          null
       , 3000
   , 5000
 
 
   setTimeout ->
-    now = new Date
-    hour = now.getHours()
+    now    = new Date
+    hour   = now.getHours()
     minute = now.getMinutes().toString()
 
     if hour > 12
-      hour = (hour - 12).toString()
+      hour     = (hour - 12).toString()
       meridian = 'pm'
     else
       meridian = 'am'
