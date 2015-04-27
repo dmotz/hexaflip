@@ -198,7 +198,6 @@ class window.HexaFlip
 
 
   _onTouchStart: (e, cube) ->
-    e.preventDefault()
     cube.touchStarted = true
     cube.holder.classList.add 'no-tween'
     if e.type is 'touchstart'
