@@ -1,0 +1,30 @@
+{
+  "name": "hexaflip",
+  "description": "Visualizes arrays as cube interfaces.",
+  "author": {
+    "name": "Dan Motzenbecker",
+    "email": "dan@oxism.com",
+    "url": "http://oxism.com"
+  },
+  "homepage": "http://oxism.com/hexaflip/",
+  "version": "0.1.6",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/dmotz/hexaflip.git"
+  },
+  "main": "./hexaflip.js",
+  "keywords": [
+    "DOM",
+    "frontend"
+  ],
+  "bugs": {
+    "url": "http://github.com/dmotz/hexaflip/issues"
+  },
+  "devDependencies": {
+    "coffee-script": "^1.9.2",
+    "nib": "^1.1.0",
+    "stylus": "^0.51.1",
+    "uglify-js": "^2.4.20"
+  }
+}
