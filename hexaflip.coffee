@@ -1,5 +1,5 @@
 # HexaFlip
-# 0.1.5
+# 0.1.6
 # Dan Motzenbecker
 # http://oxism.com
 # Copyright 2013, MIT License
