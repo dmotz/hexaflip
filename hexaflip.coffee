@@ -32,7 +32,7 @@ faceNames    = ['front', 'bottom', 'back', 'top', 'left', 'right']
 faceSequence = faceNames[...4]
 urlRx        = /(^(?:(?:(?:(?:https?)|(?:file)):)?\/\/)|^(?:data:)|^(?:(?:\.\.?)?\/))(?:.+)/i
 
-class window.HexaFlip
+class HexaFlip
 
   constructor: (@el, @sets, @options = {}) ->
     return unless css.transform and @el
@@ -298,7 +298,15 @@ class window.HexaFlip
     @flip true
 
 
-return unless ($ = window.jQuery or window.$) and $.data
+if module?.exports
+  module.exports = HexaFlip
+else if define?.amd
+  define -> HexaFlip
+else
+  window.HexaFlip = HexaFlip
+
+return unless window? and ($ = window.jQuery or window.$) and $.data
+
 $::hexaFlip = (sets, options) ->
   return @ unless css.transform
   if typeof sets is 'string'
