@@ -2,16 +2,19 @@ demoText = [
   'HEXA'.split ''
   'FLIP'.split ''
 ]
+
 logoSettings =
-    size:        120
-    margin:      8
-    fontSize:    82
-    perspective: 450
+  size:        120
+  margin:      8
+  fontSize:    82
+  perspective: 450
+
 
 makeObj = (a) ->
   o = {}
   o['letter' + i] = a for v, i in a
   o
+
 
 getSeq = (a, reverse, random) ->
   o = {}
@@ -25,6 +28,7 @@ getSeq = (a, reverse, random) ->
       p = i
     o['letter' + i] = a[p]
   o
+
 
 document.addEventListener 'DOMContentLoaded', ->
   logos     = document.getElementsByClassName 'logo'
@@ -52,10 +56,10 @@ document.addEventListener 'DOMContentLoaded', ->
   , 1000
 
   setTimeout ->
-      setInterval ->
-          textDemos[n].setValue getSeq demoText[n], false, true for n in [0..1]
-          null
-      , 3000
+    setInterval ->
+        textDemos[n].setValue getSeq demoText[n], false, true for n in [0..1]
+        null
+    , 3000
   , 5000
 
 

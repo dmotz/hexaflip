@@ -24,7 +24,7 @@
   "devDependencies": {
     "coffee-script": "^1.9.2",
     "nib": "^1.1.0",
-    "stylus": "^0.51.1",
+    "stylus": "^0.52.4",
     "uglify-js": "^2.4.20"
   }
 }
