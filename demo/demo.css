@@ -76,11 +76,6 @@ p code {
   margin: 0 auto;
   margin-bottom: 4rem;
 }
-.logo .hexaflip-cube {
-  opacity: 0.9;
-  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=90)";
-  filter: alpha(opacity=90);
-}
 .logo .hexaflip-cube .hexaflip-side-left,
 .logo .hexaflip-cube .hexaflip-side-right {
   background-color: #222 !important;
@@ -88,6 +83,9 @@ p code {
 .logo .hexaflip-cube .hexaflip-side {
   font-weight: 100;
   text-shadow: none;
+  opacity: 0.9;
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=90)";
+  filter: alpha(opacity=90);
 }
 .logo .hexaflip-cube .hexaflip-side:nth-child(1n+1) {
   background-color: #069ad5;
