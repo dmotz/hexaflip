@@ -14,7 +14,7 @@ for a guide through the process and some [demos](http://tympanus.net/Tutorials/H
 Create an instance by passing a DOM element and a key-value set of arrays:
 
 ```javascript
-var cubeSet = new HexaFlip(documentGetElementById('my-el'),
+var cubeSet = new HexaFlip(document.getElementById('my-el'),
     {
         prince: ['For You', 'Prince', 'Dirty Mind', 'Controversy', '1999', 'Around the World in a Day'],
         curtis: ['Curtis', 'Roots', 'Super Fly', 'Back to the World', 'Got to Find a Way', 'Sweet Exorcist']
