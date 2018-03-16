@@ -1,5 +1,5 @@
-#![HexaFlip](http://oxism.com/hexaflip/demo/hexaflip.png)
-#[HexaFlip](http://oxism.com/hexaflip/)
+![HexaFlip](http://oxism.com/hexaflip/demo/hexaflip.png)
+# [HexaFlip](http://oxism.com/hexaflip/)
 ### Transform arrays of any length into cubes with infinite sides.
 ### Featuring touch/mouse interaction, getter/setter methods, zero dependencies, and jQuery support.
 [Dan Motzenbecker](http://oxism.com), MIT License
